@@ -1,0 +1,46 @@
+---
+title: "The lists"
+format:
+  dashboard:
+    logo: "images/cfg-logo.png"
+    orientation: columns
+---
+
+
+## Column {width = "35%"}
+
+placeholeer col1
+
+```{r, loadpackes}
+#| echo: false
+#| include: false
+
+library(tidyverse)
+
+
+```
+
+
+## Column {width = "65%"}
+
+placeholeer col2
+
+```{r, printsw}
+
+head(starwars)
+
+```
+
+
+### Row {height = "10%"}
+
+placeholeer row1
+
+### Row {height = "70%"}
+
+placeholeer row2
+
+### Row {height = "20%"}
+
+placeholeer row3
+
