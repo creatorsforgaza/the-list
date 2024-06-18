@@ -16,6 +16,27 @@ placeholeer col1
 #| include: false
 
 library(tidyverse)
+library(googledrive)
+library(googlesheets4)
+
+
+```
+
+```{r}
+
+#| echo: false
+#| include: false
+
+drive_auth(path = ".secrets/client_secret.json")
+gs4_auth(path = ".secrets/client_secret.json")
+
+ss <- drive_get(id = Sys.getenv("GOOGLE_SHEET_ID"))
+
+sheet_gaza <- read_sheet(ss)
+
+sheet_gaza %>% 
+  dplyr::select(1:2) %>% 
+  head()
 
 
 ```
@@ -35,6 +56,13 @@ head(starwars)
 ### Row {height = "10%"}
 
 placeholeer row1
+
+```{r}
+
+Sys.Date()
+
+```
+
 
 ### Row {height = "70%"}
 
