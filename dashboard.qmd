@@ -1,5 +1,10 @@
 ---
-title: "The lists"
+title: "The List"
+execute:
+  message: false
+  error: false
+  warning: false
+  echo: false
 format:
   dashboard:
     logo: "images/cfg-logo.png"
@@ -7,9 +12,9 @@ format:
 ---
 
 
-## Column {width = "35%"}
+## Column {width = "85%"}
 
-placeholeer col1
+
 
 ```{r, loadpackes}
 #| echo: false
@@ -18,6 +23,11 @@ placeholeer col1
 library(tidyverse)
 library(googledrive)
 library(googlesheets4)
+library(rvest)
+library(bslib)
+library(bsicons)
+library(gt)
+library(gtExtras)
 
 
 ```
@@ -28,8 +38,8 @@ library(googlesheets4)
 #| include: false
 
 # for local
-# drive_auth(path = ".secrets/client_secret.json",
-#            subject = Sys.getenv("GSHEET_EMAIL"))
+# drive_auth(path = ".secrets/client_secret.json")
+# gs4_auth(path = ".secrets/client_secret.json")
 
 # for gha
 drive_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
@@ -41,21 +51,194 @@ ss <- drive_get(id = Sys.getenv("GOOGLE_SHEET_ID")
 
 sheet_gaza <- read_sheet(ss)
 
-sheet_gaza %>% 
-  dplyr::select(1:2) %>% 
-  head()
+# idea, when you click "find out more, it shows the information about the family on the right side of the dashboar
+
+```
+
+```{r get links}
+
+
+all_gfm_links <- sheet_gaza %>% 
+  # removing fund with broken link for now
+  janitor::clean_names() %>% 
+  dplyr::filter(person_family != "Jenna/Hashem",
+                status != "CLOSED / NOT ACCEPTING DONATIONS") %>%   
+  dplyr::select(links) %>% 
+  dplyr::filter(str_detect(links, "gofund"))
+
+
+test_tib <- tibble(
+  # campaign_title = NULL,
+                   link = NULL,
+                   money_raised = NULL,
+                   total_goal_amount = NULL,
+                   total_num_donations = NULL)
+
+
+
+num_funds <- nrow(all_gfm_links)
+
+
+
+for(i in 1:num_funds){
+
+  read_html_func <- read_html(as.character(all_gfm_links[i,1]))
+
+  link <- as.character(all_gfm_links[i,1])
+
+  test_tib[i, "link"] = link
+
+  # test_tib[i, "campaign_title"] = read_html_func %>%
+  #   html_elements(css = ".p-campaign-header") %>%
+  #   html_text()
+
+  mr_td =  read_html_func %>%
+    html_elements(css = ".hrt-disp-inline") %>%
+    html_text()
+
+  test_tib[i, "money_raised"] = mr_td[1]
+
+  test_tib[i, "total_num_donations"] = stringr::str_sub(mr_td[2], start = 2L, end = -2L)
+
+  total_goal = read_html_func %>%
+    html_elements(css = ".hrt-text-body-sm") %>%
+    html_text()
+
+  test_tib[i, "total_goal_amount"] = readr::parse_number(total_goal[1])
+
+
+}
+
+```
+
+```{r testing currency rates}
+
+# Load necessary librarie
+
+
 
 
 ```
 
 
-## Column {width = "65%"}
+```{r cleaning df}
+
+
+x <- test_tib
+
+final_table <-  x %>% 
+  dplyr::mutate(amount_raised_num = parse_number(money_raised)) %>% 
+  dplyr::mutate(currency = str_extract(money_raised, "[€|$|kr|£]")) %>% 
+  dplyr::mutate(amount_raised_in_usd = case_when(
+    currency == "$" ~ amount_raised_num,
+    currency == "€" ~ amount_raised_num*1.074,
+    currency == "£" ~ amount_raised_num*1.271,
+    currency == "k" ~ amount_raised_num*0.095,
+    TRUE ~ 9999999999999
+  )) %>% 
+  dplyr::mutate(percent_of_goal = amount_raised_num / total_goal_amount) %>% 
+  dplyr::left_join(sheet_gaza %>% 
+                     dplyr::select(1:2, Status, links),
+                   by = c("link" = "links")) %>% 
+  dplyr::arrange(desc(Status), percent_of_goal) %>%  
+  dplyr::select(link, link_text = `GFM LINK`,
+                total_num_donations, amount_raised_in_usd, percent_of_goal) %>% 
+  dplyr::mutate(donate_now_link = paste0(link, "/donate?source=btn_donate")) %>% 
+  dplyr::mutate(row_n = row_number())
+
+sum_all_donations_in_usd <- final_table %>%
+  summarise(sum(amount_raised_in_usd)) %>%
+  as.numeric() %>%
+  format(big.mark = ",")
+
+```
+
+### Row {height = "10%"}
+
+```{r total donations}
+#| content: valuebox
+#| title: "Total Donations"
+#| 
+list(
+  color= "forestgreen",
+  value = paste0("$", sum_all_donations_in_usd),
+  icon = bs_icon("currency-dollar")
+)
+```
+
+### Row {height = "90%"}
+
+```{r final table}
+
+
+link_text <- final_table %>% 
+  dplyr::pull(link_text)
+
+
+final_table %>% 
+  dplyr::select(-c(link_text, donate_now_link)) %>% 
+  dplyr::relocate(row_n, .before = link) %>% 
+  gt(rowname_col = "row_n") %>% 
+  gt::tab_header(
+    title = "Creators for Gaza Gofundme Campaign Totals",
+    subtitle = paste0("Updated ", lubridate::now())
+  ) %>% 
+  gt::fmt_image(
+    columns = row_n,
+    path = paste0(here::here(), "/qr-codes"),
+    file_pattern = "{x}.png",
+    width = "6em",
+    height = "6m"
+  ) %>% 
+  gt::fmt_url(
+    columns = link, 
+    label = link_text,
+    as_button = TRUE,
+    button_fill = "firebrick",
+    button_width = px(200),
+    button_outline = "black"
+  ) %>% 
+  gt::tab_style(
+    style = cell_text(whitespace = "pre-wrap",
+                      weight = "bold",
+                      stretch = "ultra-expanded"),
+    locations = cells_body(
+      columns = link
+    )
+  ) %>% 
+  gt::fmt_currency(columns = amount_raised_in_usd,
+                 decimals = 2) %>% 
+  # gt::fmt_percent(columns = percent_of_goal,
+  #                 decimals = 0) %>%
+  gtExtras::gt_plt_bar_pct(
+    column = percent_of_goal,
+    labels = TRUE,
+    fill = "pink",
+    height = 26,
+    width = 100,
+    font_style = "bold",
+    font_size = "12px",
+    decimals = 0,
+    label_cutoff = 0.2
+  )  %>% 
+  gt::cols_label(
+    # campaign_title = "Fundraiser",
+    total_num_donations = "Number of donations",
+    amount_raised_in_usd = "amount raised ($)",
+    percent_of_goal = "Percent of goal reached",
+    row_n = "QR Code"
+  )
+
+
+```
+
+
+## Column {width = "15%"}
 
 placeholeer col2
 
 ```{r, printsw}
 
-head(starwars)
 
 ```
 
