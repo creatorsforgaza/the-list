@@ -12,7 +12,7 @@ format:
 ---
 
 
-## Column {width = "85%"}
+## Column {width = "50%"}
 
 
 
@@ -153,20 +153,23 @@ sum_all_donations_in_usd <- final_table %>%
 
 ```
 
-### Row {height = "10%"}
 
 ```{r total donations}
 #| content: valuebox
-#| title: "Total Donations"
+#| title: "Total Donations in USD"
 #| 
 list(
   color= "forestgreen",
   value = paste0("$", sum_all_donations_in_usd),
-  icon = "currency-dollar"
+  icon = "cash"
 )
 ```
 
-### Row {height = "90%"}
+
+
+## Column {width = "50%"}
+
+placeholeer col2
 
 ```{r final table}
 
@@ -233,32 +236,4 @@ final_table %>%
 ```
 
 
-## Column {width = "15%"}
-
-placeholeer col2
-
-```{r, printsw}
-
-
-```
-
-
-### Row {height = "10%"}
-
-placeholeer row1
-
-```{r}
-
-Sys.Date()
-
-```
-
-
-### Row {height = "70%"}
-
-placeholeer row2
-
-### Row {height = "20%"}
-
-placeholeer row3
 
