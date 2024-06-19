@@ -27,9 +27,14 @@ library(googlesheets4)
 #| echo: false
 #| include: false
 
-drive_auth(path = ".secrets/client_secret.json",
-           subject = Sys.getenv("GSHEET_EMAIL"))
-gs4_auth(path = ".secrets/client_secret.json")
+# for local
+# drive_auth(path = ".secrets/client_secret.json",
+#            subject = Sys.getenv("GSHEET_EMAIL"))
+
+# for gha
+drive_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
+
+gs4_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
 
 ss <- drive_get(id = Sys.getenv("GOOGLE_SHEET_ID"))
 
