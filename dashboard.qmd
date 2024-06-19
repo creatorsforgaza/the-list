@@ -8,11 +8,11 @@ execute:
 format:
   dashboard:
     logo: "images/cfg-logo.png"
-    orientation: columns
+    orientation: rows
 ---
 
 
-## Column 
+## Row
 
 
 
@@ -80,7 +80,7 @@ num_funds <- nrow(all_gfm_links)
 
 
 
-for(i in 1:num_funds){
+for(i in 1:10){
 
   read_html_func <- read_html(as.character(all_gfm_links[i,1]))
 
@@ -167,9 +167,8 @@ list(
 
 
 
-## Column 
+## Row
 
-Table
 
 ```{r final table}
 
@@ -223,7 +222,11 @@ final_table %>%
     font_size = "12px",
     decimals = 0,
     label_cutoff = 0.2
-  )  %>% 
+  )  %>%
+  gt::tab_options(
+    container.height = pct(100),
+    container.overflow.x = TRUE
+  ) %>%   
   gt::cols_label(
     # campaign_title = "Fundraiser",
     total_num_donations = "Number of donations",
