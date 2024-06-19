@@ -12,7 +12,7 @@ format:
 ---
 
 
-## Column {width = "50%"}
+## Column 
 
 
 
@@ -38,13 +38,13 @@ library(gtExtras)
 #| include: false
 
 # for local
-# drive_auth(path = ".secrets/client_secret.json")
-# gs4_auth(path = ".secrets/client_secret.json")
+drive_auth(path = ".secrets/client_secret.json")
+gs4_auth(path = ".secrets/client_secret.json")
 
 # for gha
-drive_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
-
-gs4_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
+# drive_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
+# 
+# gs4_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
 
 ss <- drive_get(id = Sys.getenv("GOOGLE_SHEET_ID") 
                 )
@@ -167,9 +167,9 @@ list(
 
 
 
-## Column {width = "50%"}
+## Column 
 
-placeholeer col2
+Table
 
 ```{r final table}
 
@@ -181,7 +181,7 @@ link_text <- final_table %>%
 final_table %>% 
   dplyr::select(-c(link_text, donate_now_link)) %>% 
   dplyr::relocate(row_n, .before = link) %>% 
-  gt(rowname_col = "row_n") %>% 
+  gt() %>% 
   gt::tab_header(
     title = "Creators for Gaza Gofundme Campaign Totals",
     subtitle = paste0("Updated ", lubridate::now())
@@ -198,7 +198,7 @@ final_table %>%
     label = link_text,
     as_button = TRUE,
     button_fill = "firebrick",
-    button_width = px(200),
+    button_width = px(150),
     button_outline = "black"
   ) %>% 
   gt::tab_style(
