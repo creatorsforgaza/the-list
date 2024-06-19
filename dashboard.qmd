@@ -55,9 +55,7 @@ sheet_gaza <- read_sheet(ss)
 
 ```
 
-```{r get links}
-
-
+```{r get links1}
 all_gfm_links <- sheet_gaza %>% 
   # removing fund with broken link for now
   janitor::clean_names() %>% 
@@ -77,10 +75,11 @@ test_tib <- tibble(
 
 
 num_funds <- nrow(all_gfm_links)
+```
 
 
-
-for(i in 1:10){
+```{r get links2}
+for(i in 1:2){
 
   read_html_func <- read_html(as.character(all_gfm_links[i,1]))
 
