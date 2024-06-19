@@ -1,10 +1,5 @@
 ---
 title: "The List"
-execute:
-  message: false
-  error: false
-  warning: false
-  echo: false
 format:
   dashboard:
     logo: "images/cfg-logo.png"
@@ -19,6 +14,8 @@ format:
 ```{r, loadpackes}
 #| echo: false
 #| include: false
+#| message: false
+#| warning: false
 
 library(tidyverse)
 library(googledrive)
@@ -38,13 +35,13 @@ library(gtExtras)
 #| include: false
 
 # for local
-# drive_auth(path = ".secrets/client_secret.json")
-# gs4_auth(path = ".secrets/client_secret.json")
+drive_auth(path = ".secrets/client_secret.json")
+gs4_auth(path = ".secrets/client_secret.json")
 
 # for gha
-drive_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
-
-gs4_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
+# drive_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
+# 
+# gs4_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
 
 ss <- drive_get(id = Sys.getenv("GOOGLE_SHEET_ID") 
                 )
@@ -56,6 +53,10 @@ sheet_gaza <- read_sheet(ss)
 ```
 
 ```{r get links1}
+
+#| echo: false
+#| include: false
+
 all_gfm_links <- sheet_gaza %>% 
   # removing fund with broken link for now
   janitor::clean_names() %>% 
@@ -79,6 +80,10 @@ num_funds <- nrow(all_gfm_links)
 
 
 ```{r get links2}
+
+#| echo: false
+#| include: false
+
 for(i in 1:2){
 
   read_html_func <- read_html(as.character(all_gfm_links[i,1]))
@@ -121,6 +126,9 @@ for(i in 1:2){
 
 
 ```{r cleaning df}
+
+#| echo: false
+#| include: false
 
 
 x <- test_tib
