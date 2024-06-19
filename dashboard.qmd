@@ -25,7 +25,6 @@ library(googledrive)
 library(googlesheets4)
 library(rvest)
 library(bslib)
-library(bsicons)
 library(gt)
 library(gtExtras)
 
@@ -162,7 +161,7 @@ sum_all_donations_in_usd <- final_table %>%
 list(
   color= "forestgreen",
   value = paste0("$", sum_all_donations_in_usd),
-  icon = bs_icon("currency-dollar")
+  icon = "currency-dollar"
 )
 ```
 
