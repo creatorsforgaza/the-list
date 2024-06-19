@@ -36,7 +36,8 @@ drive_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
 
 gs4_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
 
-ss <- drive_get(id = Sys.getenv("GOOGLE_SHEET_ID"))
+ss <- drive_get(id = Sys.getenv("GOOGLE_SHEET_ID") 
+                )
 
 sheet_gaza <- read_sheet(ss)
 
