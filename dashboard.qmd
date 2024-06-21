@@ -1,7 +1,0 @@
----
-title: "The List"
-format:
-  dashboard:
-    logo: "images/cfg-logo.png"
-    orientation: rows
----

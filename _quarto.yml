@@ -3,12 +3,14 @@ project:
 
 website:
   title: "Creators for Gaza"
-  sidebar:
+  navbar:
     contents:
       - href: index.qmd
         text: Home
-      - href: about.qmd
+      - href: sign-up-form.qmd
         text: Sign-up Form
+      - href: donations-data.qmd
+        text: Fundraising information
       # - href: dashboard.qmd
       #   text: Dashboard 
 
