@@ -5,14 +5,11 @@ execute:
   error: false
   warning: false
   echo: false
-format: 
-  html:
-    toc: false
+format: html
 ---
 
 ![](images/cfg-logo.png){fig-align="center"}
 
-## Table
 
 ```{r}
 
@@ -58,8 +55,7 @@ final_table <-  x %>%
                      dplyr::select(1:2, Status, links),
                    by = c("link" = "links")) %>% 
   dplyr::arrange(desc(Status), percent_of_goal) %>%  
-  dplyr::select(link, link_text = `GFM LINK`,
-                percent_of_goal) %>% 
+  dplyr::select(link, link_text = `GFM LINK`) %>% 
   dplyr::mutate(link_text = str_wrap(link_text, width = 18)) %>% 
   # dplyr::mutate(donate_now_link = paste0(link, "/donate?source=btn_donate")) %>% 
   dplyr::mutate(row_n = row_number())
@@ -98,22 +94,22 @@ final_table %>%
   dplyr::relocate(row_n, .before = link) %>% 
   gt() %>% 
   gt::tab_header(
-    title = "Creators for Gaza Gofundme Campaign Totals",
+    title = "Creators for Gaza Gofundme Campaigns",
     subtitle = paste0("Updated ", lubridate::now())
   ) %>% 
   gt::fmt_image(
     columns = row_n,
     path = paste0(here::here(), "/qr-codes"),
     file_pattern = "{x}.png",
-    width = "10em",
-    height = "10em"
+    width = "9em",
+    height = "9em"
   ) %>% 
   gt::fmt_url(
     columns = link, 
     label = link_text,
     as_button = TRUE,
     button_fill = "firebrick",
-    button_width = px(250),
+    button_width = px(175),
     button_outline = "black"
   ) %>% 
   gt::tab_style(
@@ -130,22 +126,21 @@ final_table %>%
   # ) %>% 
   # gt::fmt_percent(columns = percent_of_goal,
   #                 decimals = 0) %>%
-  gtExtras::gt_plt_bar_pct(
-    column = percent_of_goal,
-    labels = TRUE,
-    fill = "pink",
-    height = 46,
-    width = 120,
-    font_style = "bold",
-    font_size = "17px",
-    decimals = 0,
-    label_cutoff = 0.2
-  ) %>%   
+  # gtExtras::gt_plt_bar_pct(
+  #   column = percent_of_goal,
+  #   labels = TRUE,
+  #   fill = "pink",
+  #   height = 46,
+  #   width = 120,
+  #   font_style = "bold",
+  #   font_size = "17px",
+  #   decimals = 0,
+  #   label_cutoff = 0.2
+  # ) %>%   
   # gt::cols_hide(
   #   columns = currency_abv,
   # )
   gt::cols_label(
-    percent_of_goal = "Percent of goal reached",
     row_n = "QR Code"
   ) %>% 
   gt::tab_options(table.width = pct(100))  

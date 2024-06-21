@@ -5,14 +5,11 @@ execute:
   error: false
   warning: false
   echo: false
-format: 
-  html:
-    toc: false
+format: html
 ---
 
 ![](images/cfg-logo.png){fig-align="center"}
 
-## Table
 
 ```{r}
 
