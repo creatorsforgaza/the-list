@@ -44,8 +44,6 @@ test_tib <- tibble(
 
 num_funds <- nrow(all_gfm_links)
 
-
-
 ### for last 20 donations
 start_word <- '\\,\\\\\"donations\\\\\"\\:\\['
 end_word <- 'suggested_donation_stats'
