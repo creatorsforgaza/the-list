@@ -2,15 +2,15 @@ project:
   type: website
 
 website:
-  title: "the-list"
+  title: "Creators for Gaza"
   sidebar:
     contents:
       - href: index.qmd
         text: Home
       - href: about.qmd
-        text: About
-      - href: dashboard.qmd
-        text: Dashboard 
+        text: Sign-up Form
+      # - href: dashboard.qmd
+      #   text: Dashboard 
 
 format:
   html:
