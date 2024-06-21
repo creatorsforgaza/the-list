@@ -50,7 +50,7 @@ num_funds <- nrow(all_gfm_links)
 start_word <- '\\,\\\\\"donations\\\\\"\\:\\['
 end_word <- 'suggested_donation_stats'
 
-for(i in 1:10{
+for(i in 1:10){
   
   read_html_func <- read_html(as.character(all_gfm_links[i,1]))
   
