@@ -56,9 +56,15 @@ start_word <- '\\,\\\\\"donations\\\\\"\\:\\['
 end_word <- 'suggested_donation_stats'
 
 
+
 for(i in 1:num_funds){
   
-  read_html_func <- read_html(as.character(all_gfm_links[i,1]))
+  read_html_func <- rvest::read_html(as.character(all_gfm_links[i,1]))
+  
+  # Add a random delay between 1 to 5 seconds
+  random_delay <- runif(1, 1, 5)
+  Sys.sleep(random_delay)
+  
   
   # read_html_func <- polite_read_html(as.character(all_gfm_links[i,1]))
   
