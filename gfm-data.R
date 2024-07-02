@@ -5,14 +5,20 @@ library(rvest)
 library(bslib)
 library(gt)
 library(gtExtras)
+# library(polite)
+
+# polite for scraping
+# polite::use_manners(save_as = "polite-scrape.R")
+# polite::use_manners()
+# source("R/polite-scrape.R")
 
 # for local
-# drive_auth(path = ".secrets/client_secret.json")
-# gs4_auth(path = ".secrets/client_secret.json")
+drive_auth(path = ".secrets/client_secret.json")
+gs4_auth(path = ".secrets/client_secret.json")
 
-drive_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
-
-gs4_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
+# drive_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
+# 
+# gs4_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
 
 ss <- drive_get(id = Sys.getenv("GOOGLE_SHEET_ID") 
 )
@@ -35,10 +41,11 @@ test_tib <- tibble(
   total_goal_amount = NULL,
   total_num_donations = NULL,
   total_num_donations_24_hours = NULL,
-  money_raised_24_hours = NULL,
-  total_num_donations_last_20 = NULL,
-  money_raised_last_20 = NULL,
-  num_days_last_20 = NULL)
+  money_raised_24_hours = NULL
+  # total_num_donations_last_20 = NULL,
+  # money_raised_last_20 = NULL,
+  # num_days_last_20 = NULL
+  )
 
 
 
@@ -48,9 +55,15 @@ num_funds <- nrow(all_gfm_links)
 start_word <- '\\,\\\\\"donations\\\\\"\\:\\['
 end_word <- 'suggested_donation_stats'
 
+
 for(i in 1:num_funds){
   
   read_html_func <- read_html(as.character(all_gfm_links[i,1]))
+  
+  # read_html_func <- polite_read_html(as.character(all_gfm_links[i,1]))
+  
+  # read_html_func <- bow(as.character(all_gfm_links[i,1])) %>% 
+  #   scrape()
   
   link <- as.character(all_gfm_links[i,1])
   
@@ -116,27 +129,27 @@ for(i in 1:num_funds){
     dplyr::pull(total_donations_amount)
   
   # get the spread from the 20 most recent donations
-  test_tib[i, "total_num_donations_last_20"] = twenty_most_recent_donations %>%
-    dplyr::summarise(
-      num_donations = n()
-    ) %>% 
-    dplyr::pull(num_donations)
-  
-  test_tib[i, "money_raised_last_20"] = twenty_most_recent_donations %>%
-    dplyr::summarise(
-      total_donations_amount = sum(amount)
-    ) %>% 
-    dplyr::pull(total_donations_amount)
-  
-  test_tib[i, "num_days_last_20"] = twenty_most_recent_donations %>%
-    dplyr::summarise(
-      most_recent_donation = max(created_at),
-      date_of_20th_most_recent_donation = min(created_at)
-    ) %>% 
-    dplyr::mutate(days = floor(most_recent_donation - 
-                                 date_of_20th_most_recent_donation)) %>% 
-    dplyr::mutate(days = as.numeric(days)) %>% 
-    dplyr::pull(days) 
+  # test_tib[i, "total_num_donations_last_20"] = twenty_most_recent_donations %>%
+  #   dplyr::summarise(
+  #     num_donations = n()
+  #   ) %>% 
+  #   dplyr::pull(num_donations)
+  # 
+  # test_tib[i, "money_raised_last_20"] = twenty_most_recent_donations %>%
+  #   dplyr::summarise(
+  #     total_donations_amount = sum(amount)
+  #   ) %>% 
+  #   dplyr::pull(total_donations_amount)
+  # 
+  # test_tib[i, "num_days_last_20"] = twenty_most_recent_donations %>%
+  #   dplyr::summarise(
+  #     most_recent_donation = max(created_at),
+  #     date_of_20th_most_recent_donation = min(created_at)
+  #   ) %>% 
+  #   dplyr::mutate(days = floor(most_recent_donation - 
+  #                                date_of_20th_most_recent_donation)) %>% 
+  #   dplyr::mutate(days = as.numeric(days)) %>% 
+  #   dplyr::pull(days) 
   
   
 }

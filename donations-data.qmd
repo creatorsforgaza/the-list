@@ -1,5 +1,5 @@
 ---
-title: "Fundraising information"
+title: "OUR GAZAN FAMILIES’ GoFundMes"
 execute:
   message: false
   error: false
@@ -8,7 +8,6 @@ execute:
 format: html
 ---
 
-![](images/cfg-logo.png){fig-align="center"}
 
 
 ```{r}
@@ -50,14 +49,18 @@ final_table <-  x %>%
     currency == "k" ~ "SEK",
     TRUE ~ NA_character_
   )) %>% 
-  dplyr::mutate(percent_of_goal = amount_raised_num / total_goal_amount) %>% 
+  dplyr::mutate(percent_of_goal = amount_raised_num / total_goal_amount*100) %>% 
   dplyr::left_join(sheet_gaza %>% 
                      dplyr::select(1:2, Status, links),
                    by = c("link" = "links")) %>% 
   dplyr::arrange(desc(Status), percent_of_goal) %>%  
-  dplyr::select(family = `GFM LINK`,
+  dplyr::mutate(link_text = str_wrap(`GFM LINK`, width = 18)) %>% 
+  # dplyr::mutate(donate_now_link = paste0(link, "/donate?source=btn_donate")) %>% 
+  dplyr::mutate(row_n = row_number())  %>% 
+  dplyr::select(row_n, link, link_text,
                 total_num_donations,currency_abv, amount_raised_num, 
-                percent_of_goal, total_num_donations_24_hours:num_days_last_20)
+                percent_of_goal, 
+                total_num_donations_24_hours:money_raised_24_hours)
 
 # sum_all_donations_in_usd <- final_table %>%
 #   summarise(sum(amount_raised_in_usd)) %>%
@@ -78,26 +81,56 @@ final_table <-  x %>%
 # )
 ```
 
+*CLICK THRU* to donate or share
 
+Table below updated on `r format(lubridate::now(), "%B %d, %Y")` at `r format(lubridate::now(), "%I:%M %p %Z") `
 
 
 ```{r final table}
 
 
-# link_text <- final_table %>% 
-#   dplyr::pull(link_text)
+link_text <- final_table %>%
+  dplyr::pull(link_text)
+
+# format(lubridate::now(), "%B %d, %Y")
+# format(lubridate::now(), "%I:%M %p %Z")
 
 
 final_table %>% 
-  # dplyr::select(-c(qr_code)) %>%
-  # dplyr::relocate(row_n, .before =  total_num_donations) %>% 
-  gt(rowname_col = "family") %>% 
-  gt::tab_header(
-    title = "Creators for Gaza Gofundme Campaign Totals",
-    subtitle = paste0("Updated ", lubridate::now())
+  dplyr::select(-c(link_text)) %>% 
+  dplyr::relocate(row_n, .before = link) %>% 
+  gt(rowname_col = "row_n") %>% 
+  # gt::tab_header(
+  #   title = "Creators for Gaza Gofundme Campaign Totals",
+  #   subtitle = paste0("Updated ", lubridate::now())
+  # ) %>% 
+  gt::fmt_image(
+    columns = row_n,
+    path = paste0(here::here(), "/qr-codes"),
+    file_pattern = "{x}.png",
+    width = "8em",
+    height = "8em"
+  ) %>% 
+  gt::fmt_url(
+    columns = link, 
+    label = link_text,
+    as_button = TRUE,
+    button_fill = "#fe1a2f",
+    button_width = px(95),
+    button_outline = "black"
+  ) %>% 
+  gt::tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_body(
+      columns = link
+    )
+  ) %>%   
+  gt::cols_width(
+    total_num_donations ~ px(40),
+    total_num_donations_24_hours ~ px(40)
   ) %>% 
   gt::fmt_currency(
-    columns = c(amount_raised_num, money_raised_24_hours, money_raised_last_20),
+    columns = c(amount_raised_num, money_raised_24_hours, money_raised_24_hours),
     currency = from_column(column = "currency_abv"),
     decimals = 2
   ) %>% 
@@ -106,44 +139,79 @@ final_table %>%
   gtExtras::gt_plt_bar_pct(
     column = percent_of_goal,
     labels = TRUE,
-    fill = "pink",
+    fill = "#01e2b4",
     height = 26,
-    width = 100,
+    width = 126,
     font_style = "bold",
     font_size = "12px",
     decimals = 0,
+    scaled = TRUE,
     label_cutoff = 0.2
   ) %>%   
   gt::cols_hide(
-    c(currency_abv,
-    total_num_donations_last_20)
-  ) %>% 
+    c(currency_abv)
+  ) %>%
   gt::tab_spanner(
     columns = c(total_num_donations_24_hours, money_raised_24_hours),
     label = "Within the last 24 hours",
     id = "24_hours"
   ) %>% 
-  gt::tab_spanner(
-    columns = c(money_raised_last_20:num_days_last_20),
-    label = "20 most recent donations",
-    id = "20_donations"
-  ) %>%   
+  # gt::tab_spanner(
+  #   columns = c(money_raised_last_20:num_days_last_20),
+  #   label = "20 most recent donations",
+  #   id = "20_donations"
+  # ) %>%   
   gt::tab_spanner(
     columns = c(total_num_donations, amount_raised_num, percent_of_goal),
     label = "Campaign totals"
   ) %>%     
   gt::cols_label(
     # campaign_title = "Fundraiser",
-    total_num_donations = "Number of donations",
-    amount_raised_num = "Amount raised",
+    total_num_donations = "# of total dona-\ntions",
+    amount_raised_num = "Total amount raised",
     percent_of_goal = "% of goal reached",
-    total_num_donations_24_hours = "Number of donations",
-    money_raised_24_hours = "Amount raised",
+    total_num_donations_24_hours = "# of dona-\ntions",
+    money_raised_24_hours = "Amount raised"
     # total_num_donations_last_20 = "Number of donations",
-    money_raised_last_20 = "Amount raised",
-    num_days_last_20 = "# of days between last 20 donations"
+    # money_raised_last_20 = "Amount raised",
+    # num_days_last_20 = "# of days between last 20 donations"
   ) %>% 
-  gt::tab_options(table.width = pct(100))  
+  gt::tab_options(table.width = pct(100),
+                      # table.font.color = "#FFFFFF",
+    table.background.color = "#FFFFFF",
+    table.font.size = px(13),
+    table.border.top.color = "transparent",
+    table.border.bottom.color = "transparent",
+    table_body.hlines.color = "transparent",
+    table_body.border.bottom.color = "transparent",
+    column_labels.border.bottom.color = "transparent",
+    column_labels.border.top.color = "transparent") %>% 
+  gt::opt_css(
+    css = "
+    table tr:nth-child(odd) {
+      background-color: white;
+    }
+      
+    table tr:hover {
+      background-color: grey;
+    }
+    
+    .cell-output-display {
+      overflow-x: unset !important;
+    }
+    
+    div#custom {
+      overflow-x: unset !important;
+      overflow-y: unset !important;
+    }
+    
+    #custom .gt_col_heading {
+      position: sticky !important;
+      top: -5px !important;
+      z-index: 10 !important;
+    }
+    "
+  )
 
 
 
