@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://creatorsforgaza.github.io/the-list/sign-up-form.html</loc>
-    <lastmod>2024-06-23T15:26:15.244Z</lastmod>
-  </url>
-  <url>
-    <loc>https://creatorsforgaza.github.io/the-list/donations-data.html</loc>
-    <lastmod>2024-06-23T15:26:15.236Z</lastmod>
+    <loc>https://creatorsforgaza.github.io/the-list/about.html</loc>
+    <lastmod>2024-07-03T04:55:21.072Z</lastmod>
   </url>
   <url>
     <loc>https://creatorsforgaza.github.io/the-list/index.html</loc>
-    <lastmod>2024-06-23T15:26:15.236Z</lastmod>
+    <lastmod>2024-07-03T04:55:21.076Z</lastmod>
+  </url>
+  <url>
+    <loc>https://creatorsforgaza.github.io/the-list/resources.html</loc>
+    <lastmod>2024-07-03T04:55:21.084Z</lastmod>
+  </url>
+  <url>
+    <loc>https://creatorsforgaza.github.io/the-list/donations-data.html</loc>
+    <lastmod>2024-07-03T04:55:21.072Z</lastmod>
+  </url>
+  <url>
+    <loc>https://creatorsforgaza.github.io/the-list/sign-up-form.html</loc>
+    <lastmod>2024-07-03T04:55:21.084Z</lastmod>
   </url>
 </urlset>
