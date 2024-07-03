@@ -57,7 +57,7 @@ end_word <- 'suggested_donation_stats'
 
 
 
-for(i in 1:num_funds){
+for(i in 1:30){
   
   read_html_func <- rvest::read_html(as.character(all_gfm_links[i,1]))
   
