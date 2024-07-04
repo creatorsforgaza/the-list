@@ -5,21 +5,21 @@ $theme-light-purple: #e3cbf2;
 $theme-darkest-gray: #f4f4f4;
 $theme-medium-gray: #01e2b4 ;
 $theme-light-gray: #f4f4f4;
-$theme-text-color: #fe1a2f ;
+$theme-text-color: #000000;
+$theme-headers-color: #fe1a2f;
+$valuebox-bg-primary: #01e2b4;
 
 /* green = #01e2b4 */
 /* red = #fe1a2f */
 
 
-@import url('https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@700&family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
 
-$font-family-sans-serif: 'Montserrat', sans-serif;
-$footer-bg: $theme-spotify-green;
+$font-family-sans-serif: 'Mulish', sans-serif;
 $font-size-root: 12px;
-$link-color: $theme-light-purple;
+$link-color: $theme-headers-color;
 $sidebar-bg: $theme-light-gray;
 $sidebar-fg: $theme-darkest-gray;
-$code-block-bg: $theme-medium-gray;
 
 
 
@@ -35,7 +35,7 @@ td {
 
 /* Change the background colours to a Spotify-like theme */
 body {
-  background-color: $theme-darkest-gray !important;
+  background-color: $theme-light-gray !important;
 }
 .card {
   --bs-card-border-width: 0px; 
@@ -125,13 +125,13 @@ div.html-fill-item.html-fill-container .custom-iframe {
 }
 
 /* Make all headings and paragraph text white */ 
-h1, h2, h3, h4, h5, h6, p {
-  color: $theme-text-color;
+h1, h2, h3, h4, h5, h6, p{
+  color: $theme-headers-color;
 }
 
 /* Make the text in the sidebar (of the Quarto website, not the dashboard), dark gray */ 
 .sidebar-title {
-  color: $theme-darkest-gray;
+  color: $theme-text-color;
 }
 
 /* Text colour of currently selected page in sidebar */
@@ -145,8 +145,8 @@ div.sidebar-item-container {
 }
 
 /* Text colour of currently hovered on sidebar list item */ 
-div.sidebar-item-container:hover {
-  color: $theme-dark-purple;
+div.navbar-item-container:hover {
+  color: $theme-headers-color;
 }
 
 /* Colour of "Next page" text in bottom right of each Quarto HTML webpage */ 
@@ -160,8 +160,8 @@ div.sidebar-item-container:hover {
 }
 
 /* Colour of non-hovered list items in table of contents */
-.sidebar .toc-actions ul li a {
-  color: $theme-text-color !important;
+.navbar .toc-actions ul li a {
+  color: $theme-headers-color !important;
 }
 
 /*-- scss:defaults --*/

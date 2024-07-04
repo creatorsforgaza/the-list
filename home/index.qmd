@@ -1,0 +1,24 @@
+---
+title: |
+  JOIN US IN HELPING \
+  GAZAN FAMILIES ESCAPE THE GENOCIDE
+listing:
+  contents: 
+    - "creator-amplifier/index.qmd"
+    - "share-the-list/index.qmd"
+  type: grid
+page-layout: full
+toc: false
+---
+
+
+
+
+
+
+### We are a global collective of creators amplifying the fundraising campaigns of our loved ones fleeing the onslaught in Gaza.
+
+### **YALLA WE NEED YOU**
+
+<br>
+

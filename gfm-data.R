@@ -5,16 +5,13 @@ library(rvest)
 library(bslib)
 library(gt)
 library(gtExtras)
-# library(polite)
+library(polite)
 
-# polite for scraping
-# polite::use_manners(save_as = "polite-scrape.R")
-# polite::use_manners()
-# source("R/polite-scrape.R")
 
 # for local
 # drive_auth(path = ".secrets/client_secret.json")
 # gs4_auth(path = ".secrets/client_secret.json")
+
 
 drive_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
 
@@ -57,27 +54,30 @@ end_word <- 'suggested_donation_stats'
 
 
 
-for(i in 1:30){
+# response_temp <- map(funds_trial[1:3],
+#                      ~scrape(session,
+#                              query = list(f = .x)))
+
+
+
+# function for polite scraping
+polite_scraping <- politely(rvest::read_html, verbose = TRUE)  
+
+#### trying out polite ----
+for(i in 1:num_funds){
+
   
-  read_html_func <- rvest::read_html(as.character(all_gfm_links[i,1]))
-  
-  # Add a random delay between 1 to 5 seconds
+  read_html_func <- polite_scraping(as.character(all_gfm_links[i,1]))
+  # 
+  # # Add a random delay between 1 to 5 seconds
   random_delay <- runif(1, 1, 5)
   Sys.sleep(random_delay)
-  
-  
-  # read_html_func <- polite_read_html(as.character(all_gfm_links[i,1]))
-  
-  # read_html_func <- bow(as.character(all_gfm_links[i,1])) %>% 
-  #   scrape()
+
   
   link <- as.character(all_gfm_links[i,1])
   
   test_tib[i, "link"] = link
   
-  # test_tib[i, "campaign_title"] = read_html_func %>%
-  #   html_elements(css = ".p-campaign-header") %>%
-  #   html_text()
   
   mr_td =  read_html_func %>%
     html_elements(css = ".hrt-disp-inline") %>%
@@ -159,3 +159,13 @@ for(i in 1:30){
   
   
 }
+
+
+
+
+
+# polite for scraping
+# polite::use_manners(save_as = "polite-scrape.R")
+# polite::use_manners()
+# source("R/polite-scrape.R")
+

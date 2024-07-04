@@ -1,0 +1,19 @@
+---
+title: |
+  OUR \
+  GAZAN FAMILIES
+image: google-doc-list.png  
+---
+
+[![Donate or share the list](google-doc-list.png){fig-align="center" width="536"}](https://docs.google.com/document/d/1c0K0nP6VQ2PrCM_2ggLFdfHIH0y4j4t4X4I9dxx7VyU/mobilebasic)
+
+
+::: {.column-page}
+
+<iframe src="https://docs.google.com/document/d/1c0K0nP6VQ2PrCM_2ggLFdfHIH0y4j4t4X4I9dxx7VyU/mobilebasic?embedded=true" width="640" height="2593" frameborder="0" marginheight="0" marginwidth="0">
+
+Loading…
+
+</iframe>
+
+:::

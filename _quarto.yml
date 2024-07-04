@@ -9,11 +9,11 @@ website:
   navbar:
     logo: images/cfg-logo-new.jpg
     left:
-      - href: index.qmd # remove this
+      - href: home/index.qmd
         text: Home
       - href: about.qmd
         text: About
-      - href: sign-up-form.qmd
+      - href: volunteer.qmd
         text: Volunteer
       - href: donations-data.qmd
         text: Our Families
