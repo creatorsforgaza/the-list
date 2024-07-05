@@ -177,7 +177,7 @@ layout_column_wrap(
 
 *CLICK THRU* to donate or share
 
-Table below updated on `r format(lubridate::now(), "%B %d, %Y")` at `r format(lubridate::now(), "%I:%M %p %Z") `
+Table below updated on `r format(lubridate::now("UTC") - hours(7), "%B %d, %Y")` at `r paste0(format(lubridate::now("UTC") - hours(7), "%I:%M %p"), " PST") `
 
 
 
@@ -279,8 +279,8 @@ final_table %>%
     total_num_donations = "# of total donations",
     amount_raised_num = "Total amount raised",
     percent_of_goal = "% of goal reached",
-    total_num_donations_24_hours = paste0("# of donations since ",format(lubridate::now(), "%B %d, %I:%M %p %Z")),
-    money_raised_24_hours = paste0("Amount raised since ",format(lubridate::now(), "%B %d, %I:%M %p %Z")),
+    total_num_donations_24_hours = paste0("# of donations since ",format(lubridate::now("UTC") - hours(7), "%B %d, %I:%M %p"), " PST"),
+    money_raised_24_hours = paste0("Amount raised since ",format(lubridate::now("UTC") - hours(7), "%B %d, %I:%M %p"), " PST"),
     row_n = "QR Code",
     link = "Link to GoFundMe"
     # total_num_donations_last_20 = "Number of donations",

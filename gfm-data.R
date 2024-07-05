@@ -61,22 +61,23 @@ end_word <- 'suggested_donation_stats'
 
 
 # function for polite scraping
-polite_scraping <- politely(rvest::read_html, verbose = TRUE)  
+polite_scraping <- politely(rvest::read_html,
+                            paste0("I'm a polite ", getOption("HTTPUserAgent"), " bot"))  
 
 #### trying out polite ----
 for(i in 1:num_funds){
 
   
-  if(i == 1){
+  # if(i == 1){
   
   read_html_func <- polite_scraping(as.character(all_gfm_links[i,1]))
   
-  }
-  else{
-    
-    read_html_func <- rvest::read_html(as.character(all_gfm_links[i,1]))
-    
-  }
+  # }
+  # else{
+  #   
+  #   read_html_func <- rvest::read_html(as.character(all_gfm_links[i,1]))
+  #   
+  # }
   # 
   # # Add a random delay between 1 to 15 seconds
   random_delay <- runif(1, 10, 30)
@@ -134,12 +135,12 @@ for(i in 1:num_funds){
     dplyr::select(-other) 
   
   test_tib[i, "total_num_donations_24_hours"] = twenty_most_recent_donations %>%
-    dplyr::filter((now(tzone = "UTC") - hours(5)) - hours(24) <= created_at) %>%
+    dplyr::filter((now(tzone = "UTC") - hours(7)) - hours(24) <= created_at) %>%
     dplyr::summarise(num_donations = n()) %>% 
     dplyr::pull(num_donations)
   
   test_tib[i, "money_raised_24_hours"] = twenty_most_recent_donations %>%
-    dplyr::filter((now(tzone = "UTC") - hours(5)) - hours(24) <= created_at) %>%
+    dplyr::filter((now(tzone = "UTC") - hours(7)) - hours(24) <= created_at) %>%
     dplyr::summarise(total_donations_amount = sum(amount)) %>% 
     dplyr::pull(total_donations_amount)
   
