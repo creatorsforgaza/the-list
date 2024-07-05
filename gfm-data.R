@@ -67,10 +67,19 @@ polite_scraping <- politely(rvest::read_html, verbose = TRUE)
 for(i in 1:num_funds){
 
   
+  if(i == 1){
+  
   read_html_func <- polite_scraping(as.character(all_gfm_links[i,1]))
+  
+  }
+  else{
+    
+    read_html_func <- rvest::read_html(as.character(all_gfm_links[i,1]))
+    
+  }
   # 
   # # Add a random delay between 1 to 15 seconds
-  random_delay <- runif(1, 15, 60)
+  random_delay <- runif(1, 10, 30)
   Sys.sleep(random_delay)
 
   
