@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.53">
+<meta name="generator" content="quarto-1.5.54">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -72,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -93,7 +93,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./home/index.html"> 
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -124,9 +124,7 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -150,11 +148,30 @@ GAZAN FAMILIES ESCAPE THE GENOCIDE</p></h1>
 </header>
 
 
-<section id="we-are-a-global-collective-of-creators-amplifying-the-fundraising-campaigns-of-our-loved-ones-fleeing-the-onslaught-in-gaza." class="level4">
-<h4 class="anchored" data-anchor-id="we-are-a-global-collective-of-creators-amplifying-the-fundraising-campaigns-of-our-loved-ones-fleeing-the-onslaught-in-gaza.">We are a global collective of creators amplifying the fundraising campaigns of our loved ones fleeing the onslaught in Gaza.</h4>
+<section id="we-are-a-swana-led-global-collective-of-creators-amplifying-the-fundraising-campaigns-of-our-loved-ones-fleeing-the-onslaught-in-gaza." class="level3">
+<h3 class="anchored" data-anchor-id="we-are-a-swana-led-global-collective-of-creators-amplifying-the-fundraising-campaigns-of-our-loved-ones-fleeing-the-onslaught-in-gaza.">We are a SWANA-led global collective of creators amplifying the fundraising campaigns of our loved ones fleeing the onslaught in Gaza.</h3>
+<p><br></p>
+<div class="card" data-expandable="false">
+<div style="background-color: #01e2b4; text-align: center; display: flex; align-items: center; justify-content: center; height: 100%;">
+<p><span style="font-size: 2vw; width: 100%; height: 200px"><a href="https://creatorsforgaza.github.io/the-list/volunteer.html">CREATOR/AMPLIFIER SIGN-UP: Get a family assignment</a></span></p>
+</div>
+</div>
+<p><br></p>
+<p><br></p>
+<div class="card" data-expandable="false">
+<div style="background-color: #01e2b4; color: black; text-align: center; display: flex; align-items: center; justify-content: center; height: 100%;">
+<p><span style="font-size: 2vw; width: 100%; height: 500px"><a href="https://docs.google.com/document/d/1c0K0nP6VQ2PrCM_2ggLFdfHIH0y4j4t4X4I9dxx7VyU/mobilebasic">OUR GAZAN FAMILIES: Donate or share the list</a></span></p>
+</div>
+</div>
+<p><br> <br></p>
 </section>
-<section id="yalla-we-need-you" class="level4">
-<h4 class="anchored" data-anchor-id="yalla-we-need-you"><strong>YALLA WE NEED YOU</strong></h4>
+<section id="yalla-we-need-you" class="level2">
+<h2 class="anchored" data-anchor-id="yalla-we-need-you"><strong>YALLA WE NEED YOU</strong></h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/screenshots1.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
 
 
 </section>
@@ -266,6 +283,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         if (link.dataset.originalHref !== undefined) {
           link.href = link.dataset.originalHref;
         }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
       }
     }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
