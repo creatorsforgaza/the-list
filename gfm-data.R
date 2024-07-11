@@ -80,7 +80,7 @@ for(i in 1:num_funds){
   # }
   # 
   # # Add a random delay between 1 to 15 seconds
-  random_delay <- runif(1, 10, 30)
+  random_delay <- runif(1, 30, 50)
   Sys.sleep(random_delay)
 
   
