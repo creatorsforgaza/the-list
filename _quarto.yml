@@ -9,7 +9,7 @@ website:
   navbar:
     logo: images/cfg-logo-new.jpg
     left:
-      - href: home/index.qmd
+      - href: index.qmd
         text: Home
       - href: about.qmd
         text: About

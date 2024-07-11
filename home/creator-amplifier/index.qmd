@@ -4,7 +4,7 @@ image: creator.png
 ---
 
 
-[![Get a family assignment](creator.png){fig-align="center"}](https://docs.google.com/forms/d/e/1FAIpQLScYuzqzaIqmwyrlOzvf5K7WgbYhIibNZPVFQan4BFJ9UU6XSg/viewform)
+[![Get a family assignment](creator.png){fig-align="center"}](https://creatorsforgaza.github.io/the-list/volunteer.html)
 
 ::: {.column-page}
 

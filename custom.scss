@@ -17,7 +17,8 @@ $valuebox-bg-primary: #01e2b4;
 
 $font-family-sans-serif: 'Mulish', sans-serif;
 $font-size-root: 12px;
-$link-color: $theme-headers-color;
+$body-color: $theme-text-color;
+$link-color: $theme-text-color;
 $sidebar-bg: $theme-light-gray;
 $sidebar-fg: $theme-darkest-gray;
 
@@ -37,15 +38,7 @@ td {
 body {
   background-color: $theme-light-gray !important;
 }
-.card {
-  --bs-card-border-width: 0px; 
-  --bs-card-bg: $theme-darkest-gray !important;
-}
-.card-body {
-  padding: 0px;
-  color: $theme-text-color !important;
-  background-color: $theme-darkest-gray;
-}
+
 .navbar {
   background-color: $theme-medium-gray;
   color: $theme-text-color;

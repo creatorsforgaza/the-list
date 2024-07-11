@@ -1,5 +1,5 @@
 ---
-title: "OUR GAZAN FAMILIES’ GoFundMes"
+title: "OUR PALESTINIAN FAMILIES’ GoFundMes"
 execute:
   message: false
   error: false
@@ -34,7 +34,6 @@ source("gfm-data.R")
 
 
 ```{r cleaning df}
-
 #| echo: false
 #| include: false
 
@@ -57,16 +56,28 @@ final_table <-  x %>%
                    by = c("link" = "links")) %>% 
   dplyr::arrange(desc(Status), percent_of_goal) %>%  
   dplyr::mutate(link_text = str_wrap(`GFM LINK`, width = 18)) %>% 
-  # dplyr::mutate(donate_now_link = paste0(link, "/donate?source=btn_donate")) %>% 
-  dplyr::mutate(row_n = row_number())  %>% 
-  dplyr::select(row_n, link, link_text,
+  dplyr::mutate(uuid = str_sub(link, start = 19L)) %>% 
+  dplyr::select(uuid, link, link_text,
                 total_num_donations,currency_abv, amount_raised_num, 
                 percent_of_goal, 
                 total_num_donations_24_hours:money_raised_24_hours)
 
+date <- format(lubridate::floor_date(Sys.Date(), unit = 'day'), format = '%Y-%m-%d')
+readr::write_csv(final_table , glue::glue('data/final-table-{date}.csv'))
+
+```
+
+
+```{r sum of currencies}
 sum_all_donations_in_usd <- final_table %>%
   dplyr::filter(currency_abv == "USD") %>% 
   summarise(sum(amount_raised_num)) %>%
+  as.numeric() %>%
+  format(big.mark = ",")
+
+sum_all_donations_in_usd_24 <- final_table %>%
+  dplyr::filter(currency_abv == "USD") %>% 
+  summarise(sum(money_raised_24_hours)) %>%
   as.numeric() %>%
   format(big.mark = ",")
 
@@ -76,9 +87,22 @@ sum_all_donations_in_eur <- final_table %>%
   as.numeric() %>%
   format(big.mark = ",")
 
+
+sum_all_donations_in_eur_24 <- final_table %>%
+  dplyr::filter(currency_abv == "EUR") %>% 
+  summarise(sum(money_raised_24_hours)) %>%
+  as.numeric() %>%
+  format(big.mark = ",")
+
 sum_all_donations_in_gbp <- final_table %>%
   dplyr::filter(currency_abv == "GBP") %>% 
   summarise(sum(amount_raised_num)) %>%
+  as.numeric() %>%
+  format(big.mark = ",")
+
+sum_all_donations_in_gbp_24 <- final_table %>%
+  dplyr::filter(currency_abv == "GBP") %>% 
+  summarise(sum(money_raised_24_hours)) %>%
   as.numeric() %>%
   format(big.mark = ",")
 
@@ -88,11 +112,53 @@ sum_all_donations_in_sek <- final_table %>%
   as.numeric() %>%
   format(big.mark = ",")
 
+sum_all_donations_in_sek_24 <- final_table %>%
+  dplyr::filter(currency_abv == "SEK") %>% 
+  summarise(sum(money_raised_24_hours)) %>%
+  as.numeric() %>%
+  format(big.mark = ",")
+
+num_funds_usd <- final_table %>%
+  dplyr::filter(currency_abv == "USD") %>% 
+  nrow()
+
+num_funds_usd_24 <- final_table %>%
+  dplyr::filter(currency_abv == "USD") %>% 
+  dplyr::filter(money_raised_24_hours > 0.01) %>% 
+  nrow()
+
+num_funds_euro <- final_table %>%
+  dplyr::filter(currency_abv == "EUR") %>% 
+  nrow()
+
+num_funds_euro_24 <- final_table %>%
+  dplyr::filter(currency_abv == "EUR") %>% 
+  dplyr::filter(money_raised_24_hours > 0.01) %>% 
+  nrow()
+
+num_funds_gbp <- final_table %>%
+  dplyr::filter(currency_abv == "GBP") %>% 
+  nrow()
+
+num_funds_gbp_24 <- final_table %>%
+  dplyr::filter(currency_abv == "GBP") %>% 
+  dplyr::filter(money_raised_24_hours > 0.01) %>% 
+  nrow()
+
+num_funds_sek <- final_table %>%
+  dplyr::filter(currency_abv == "SEK") %>% 
+  nrow()
+
+num_funds_sek_24 <- final_table %>%
+  dplyr::filter(currency_abv == "SEK") %>% 
+  dplyr::filter(money_raised_24_hours > 0.01) %>% 
+  nrow()
+
 ```
 
 
 ```{r}
-
+# 
 # library(qrcode)
 # 
 # 
@@ -100,7 +166,7 @@ sum_all_donations_in_sek <- final_table %>%
 #   dplyr::select(link = links)
 # 
 # row_n_qr <- final_table %>%
-#   dplyr::select(row_n)
+#   dplyr::select(uuid)
 # 
 # 
 # for(i in 1:num_funds){
@@ -143,33 +209,65 @@ sum_all_donations_in_sek <- final_table %>%
 
 vbs <- list(
   value_box(
-    title = "Total amount raised in Euros",
+    title = paste0("Total amount raised in Euros from ", num_funds_euro, " funds"),
     # theme = "orange", # doesnt work must change this in scss file
     value = paste0("€", sum_all_donations_in_eur),
     icon = bs_icon("cash")
   ),
   value_box(
-    title = "Total amount raised in US Dollars",
+    title = paste0("Amount raised in Euros on ", format(lubridate::now("UTC") - hours(7), "%B %d, %Y"),
+                   " from ", num_funds_euro_24, " funds"),
+    # theme = "orange", # doesnt work must change this in scss file
+    value = paste0("€", sum_all_donations_in_eur_24),
+    icon = bs_icon("cash")
+  ),
+  value_box(
+    title = paste0("Total amount raised in US Dollars from ", num_funds_usd, " funds"),
     # theme = "#01e2b4",
     value = paste0("$", sum_all_donations_in_usd),
     icon = bs_icon("bank")
   ),
   value_box(
-    title = "Total amount raised in Pounds",
+    title = paste0("Amount raised in US Dollars on ", 
+                   format(lubridate::now("UTC") - hours(7), "%B %d, %Y"),
+                   " from ", num_funds_usd_24, " funds"),
+    # theme = "orange", # doesnt work must change this in scss file
+    value = paste0("$", sum_all_donations_in_usd_24),
+    icon = bs_icon("cash")
+  ),  
+  value_box(
+    title = paste0("Total amount raised in Pounds from ", num_funds_gbp, " funds"),
     # theme = "primary",
     value = paste0("£", sum_all_donations_in_gbp),
     icon = "cash"
   ),
   value_box(
-    title = "Total amount raised in Swedish krona",
+    title = paste0("Amount raised in Pounds on ", 
+                   format(lubridate::now("UTC") - hours(7), "%B %d, %Y"),
+                   " from ", num_funds_gbp_24, " funds"),
+    # theme = "orange", # doesnt work must change this in scss file
+    value = paste0("£", sum_all_donations_in_gbp_24),
+    icon = bs_icon("cash")
+  ),    
+  value_box(
+    title = paste0("Total amount raised in Swedish krona from ", num_funds_sek, " funds"),
     # theme = "light",
     value = paste0("k", sum_all_donations_in_sek),
     icon = "cash"
-  )
+  ),
+  value_box(
+    title = paste0("Amount raised in Swedish krona on ", 
+                   format(lubridate::now("UTC") - hours(7), "%B %d, %Y"),
+                   " from ", num_funds_sek_24, " funds"),
+    # theme = "orange", # doesnt work must change this in scss file
+    value = paste0("k", sum_all_donations_in_sek_24),
+    icon = bs_icon("cash")
+  )  
 )
 
 layout_column_wrap(
-  width = "350px",
+  width = "250px",
+  fixed_width = TRUE,
   !!!vbs
 )
 
@@ -193,7 +291,7 @@ link_text <- final_table %>%
 
 final_table %>% 
   dplyr::select(-c(link_text)) %>% 
-  dplyr::relocate(row_n, .before = link) %>% 
+  dplyr::relocate(uuid, .before = link) %>% 
   gt(
     # rowname_col = "row_n"
     ) %>%
@@ -201,13 +299,13 @@ final_table %>%
   #   title = "Creators for Gaza Gofundme Campaign Totals",
   #   subtitle = paste0("Updated ", lubridate::now())
   # ) %>% 
-  gt::fmt_image(
-    columns = row_n,
-    path = paste0(here::here(), "/qr-codes"),
-    file_pattern = "{x}.png",
-    width = "8em",
-    height = "8em"
-  ) %>% 
+  # gt::fmt_image(
+  #   columns = uuid,
+  #   path = paste0(here::here(), "/qr-codes"),
+  #   file_pattern = "{x}.png",
+  #   width = "8em",
+  #   height = "8em"
+  # ) %>% 
   gt::fmt_url(
     columns = link, 
     label = link_text,
@@ -230,7 +328,7 @@ final_table %>%
   gt::fmt_currency(
     columns = c(amount_raised_num, money_raised_24_hours, money_raised_24_hours),
     currency = from_column(column = "currency_abv"),
-    decimals = 2
+    decimals = 0
   ) %>% 
   # gt::fmt_percent(columns = percent_of_goal,
   #                 decimals = 0) %>%
@@ -244,25 +342,25 @@ final_table %>%
     font_size = "13px",
     decimals = 0,
     scaled = TRUE,
-    label_cutoff = 0.2
+    label_cutoff = 0.1
   ) %>%   
   gt::cols_hide(
-    c(currency_abv)
+    c(currency_abv, uuid)
   ) %>%
-  gt::tab_spanner(
-    columns = c(total_num_donations_24_hours, money_raised_24_hours),
-    label = paste0("Within the last 24 hours"),
-    id = "24_hours"
-  ) %>% 
+  # gt::tab_spanner(
+  #   columns = c(total_num_donations_24_hours, money_raised_24_hours),
+  #   label = paste0("Within the last 24 hours"),
+  #   id = "24_hours"
+  # ) %>% 
   # gt::tab_spanner(
   #   columns = c(money_raised_last_20:num_days_last_20),
   #   label = "20 most recent donations",
   #   id = "20_donations"
   # ) %>%   
-  gt::tab_spanner(
-    columns = c(total_num_donations, amount_raised_num, percent_of_goal),
-    label = "Campaign totals"
-  ) %>%     
+  # gt::tab_spanner(
+  #   columns = c(total_num_donations, amount_raised_num, percent_of_goal),
+  #   label = "Campaign totals"
+  # ) %>%     
   gt::tab_style(
     style = list(
       cell_borders(
@@ -274,14 +372,18 @@ final_table %>%
       columns = c(total_num_donations, amount_raised_num, percent_of_goal, total_num_donations_24_hours)
     )
   ) %>% 
+  gt::cols_align(
+    align = "right",
+    columns = total_num_donations
+  ) %>% 
   gt::cols_label(
     # campaign_title = "Fundraiser",
-    total_num_donations = "# of total donations",
+    total_num_donations = "Number of total donations",
     amount_raised_num = "Total amount raised",
-    percent_of_goal = "% of goal reached",
-    total_num_donations_24_hours = paste0("# of donations since ",format(lubridate::now("UTC") - hours(7), "%B %d, %I:%M %p"), " PST"),
-    money_raised_24_hours = paste0("Amount raised since ",format(lubridate::now("UTC") - hours(7), "%B %d, %I:%M %p"), " PST"),
-    row_n = "QR Code",
+    percent_of_goal = "Percent of goal reached",
+    total_num_donations_24_hours = paste0("Number of donations on ",format(lubridate::now("UTC") - hours(7), "%B %d")),
+    money_raised_24_hours = paste0("Amount raised on ",format(lubridate::now("UTC") - hours(7), "%B %d")),
+    # uuid = "QR Code",
     link = "Link to GoFundMe"
     # total_num_donations_last_20 = "Number of donations",
     # money_raised_last_20 = "Amount raised",

@@ -12,7 +12,7 @@ library(polite)
 # drive_auth(path = ".secrets/client_secret.json")
 # gs4_auth(path = ".secrets/client_secret.json")
 
-
+# 
 drive_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
 
 gs4_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))

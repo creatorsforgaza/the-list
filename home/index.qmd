@@ -1,7 +1,7 @@
 ---
 title: |
   JOIN US IN HELPING \
-  GAZAN FAMILIES ESCAPE THE GENOCIDE
+  OUR PALESTINIAN FAMILIES ESCAPE THE GENOCIDE
 listing:
   contents: 
     - "creator-amplifier/index.qmd"
@@ -16,7 +16,7 @@ toc: false
 
 
 
-### We are a global collective of creators amplifying the fundraising campaigns of our loved ones fleeing the onslaught in Gaza.
+### We are a SWANA-led global collective of creators amplifying the fundraising campaigns of our loved ones fleeing the onslaught in Gaza.
 
 ### **YALLA WE NEED YOU**
 

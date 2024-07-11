@@ -1,15 +1,47 @@
 ---
 title: "Resources"
+format:
+  html:
+    toc: false
+    link-external-newwindow: true
 ---
 
-![](images/resources-From-The-River_Web.jpg){fig-align="center" width="193"}
+<br>
 
--   [FROM THE RIVER TO THE SEA : Demystifying the Rallying Cry for Land Back and Liberation](https://rimoskyo.com/shop/p/from-the-river-to-the-sea)
+<br>
 
-![](images/resources-FLOOD_For-Web.jpg){fig-align="center" width="472"}
+![](home/share-the-list/google-doc-list.png){fig-align="left" width="539"}
 
--   [FLOOD: Print Propaganda in Practice](https://www.sheyamghieth.com/product/flood-print-propaganda-in-practice-free-zine-download/)
+#### [TAKE IMMEDIATE ACTION FOR PALESTINIANS EVACUATING GAZA](https://docs.google.com/document/d/1c0K0nP6VQ2PrCM_2ggLFdfHIH0y4j4t4X4I9dxx7VyU/mobilebasic)
 
-![](images/resources-MASK-UP_Web.jpg){fig-align="center" width="597"}
+<br>
 
--   [MASK UP, WE NEED YOU: Palestinian Solidarity, Covid-19, and the Struggle for Liberation](https://www.sheyamghieth.com/product/mask-up-we-need-you-palestinian-solidarity-covid-19-and-the-struggle-for-liberation/)
+<br>
+
+![](images/resources-From-The-River_Web.jpg){fig-align="left" width="193"}
+
+#### [FROM THE RIVER TO THE SEA : Demystifying the Rallying Cry for Land Back and Liberation](https://rimoskyo.com/shop/p/from-the-river-to-the-sea)
+
+<br>
+
+<br>
+
+![](images/resources-FLOOD_For-Web.jpg){fig-align="left" width="472"}
+
+#### [FLOOD: Print Propaganda in Practice](https://www.sheyamghieth.com/product/flood-print-propaganda-in-practice-free-zine-download/)
+
+<br>
+
+<br>
+
+![](images/resources-MASK-UP_Web.jpg){fig-align="left" width="597"}
+
+#### [MASK UP, WE NEED YOU: Palestinian Solidarity, Covid-19, and the Struggle for Liberation](https://www.sheyamghieth.com/product/mask-up-we-need-you-palestinian-solidarity-covid-19-and-the-struggle-for-liberation/)
+
+<br>
+<br>
+<br>
+
+![](images/screenshots5.jpg){fig-align="left"}
+
+#### [Instagram page to Artwork](https://www.instagram.com/creatorsforgaza)

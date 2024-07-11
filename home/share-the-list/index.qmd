@@ -1,7 +1,5 @@
 ---
-title: |
-  OUR \
-  GAZAN FAMILIES
+title: "OUR PALASTINIAN FAMILIES"
 image: google-doc-list.png  
 ---
 
