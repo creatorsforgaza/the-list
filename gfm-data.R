@@ -12,7 +12,7 @@ library(polite)
 # drive_auth(path = ".secrets/client_secret.json")
 # gs4_auth(path = ".secrets/client_secret.json")
 
-
+# 
 drive_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
 
 gs4_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
@@ -61,8 +61,33 @@ end_word <- 'suggested_donation_stats'
 
 
 # function for polite scraping
-polite_scraping <- politely(rvest::read_html,
-                            paste0("Hello! I'm a polite ", getOption("HTTPUserAgent"), " user"))  
+polite_scraping <- politely(rvest::read_html)  
+
+# 
+# session <- bow("https://www.gofundme.com")
+# 
+# fund_names <- c("4-months-separates-between-life-and-death-and-we",
+#                 "support-khamis-medical-care-for-spine-injury-after-bombing")
+# 
+# # this is only to illustrate the example.
+# letters <- letters[1:3] # delete this line to scrape all letters
+# funds <- all_gfm_links %>% 
+#   dplyr::mutate(fund = str_sub(links, start = 19L)) %>% 
+#   dplyr::pull(fund) %>% 
+#   head()
+# 
+# responses <- map(fund_names, ~scrape(session, query = list(f=.x)) ,
+#                  accept = "xml")
+# results <- map(responses, ~html_nodes(.x, "#id_page li") %>% 
+#                  html_text(trim = TRUE) %>% 
+#                  as.numeric() %>%
+#                  tail(1) ) %>% 
+#   map(~pluck(.x, 1, .default=1))
+# 
+# responses[[2]] %>% 
+#   # html_elements(css = ".hrt-disp-inline") %>%
+#   html_text()
+# results[[1]] 
 
 #### trying out polite ----
 for(i in 1:num_funds){
@@ -80,7 +105,7 @@ for(i in 1:num_funds){
   # }
   # 
   # # Add a random delay between 1 to 15 seconds
-  random_delay <- runif(1, 10, 30)
+  random_delay <- runif(1, 30, 65)
   Sys.sleep(random_delay)
 
   
