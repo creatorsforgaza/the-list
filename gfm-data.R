@@ -12,7 +12,7 @@ library(polite)
 # drive_auth(path = ".secrets/client_secret.json")
 # gs4_auth(path = ".secrets/client_secret.json")
 
-# 
+
 drive_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
 
 gs4_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
@@ -62,7 +62,7 @@ end_word <- 'suggested_donation_stats'
 
 # function for polite scraping
 polite_scraping <- politely(rvest::read_html,
-                            paste0("I'm a polite ", getOption("HTTPUserAgent"), " bot"))  
+                            paste0("Hello! I'm a polite ", getOption("HTTPUserAgent"), " bot"))  
 
 #### trying out polite ----
 for(i in 1:num_funds){

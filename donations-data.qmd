@@ -5,7 +5,11 @@ execute:
   error: false
   warning: false
   echo: false
-format: html
+format: 
+  html:
+    toc: false
+    # link-external-icon: true
+    link-external-newwindow: true
 ---
 
 
@@ -200,6 +204,9 @@ num_funds_sek_24 <- final_table %>%
 
 ```
 
+<br>
+
+#### Total amount raised from all the current fundraising campaigns
 
 ```{r totals}
 #| column: screen
@@ -209,60 +216,29 @@ num_funds_sek_24 <- final_table %>%
 
 vbs <- list(
   value_box(
-    title = paste0("Total amount raised in Euros from ", num_funds_euro, " funds"),
+    title = paste0("Total amount raised in Euros from ", num_funds_euro, " funds:"),
     # theme = "orange", # doesnt work must change this in scss file
     value = paste0("€", sum_all_donations_in_eur),
     icon = bs_icon("cash")
   ),
   value_box(
-    title = paste0("Amount raised in Euros on ", format(lubridate::now("UTC") - hours(7), "%B %d, %Y"),
-                   " from ", num_funds_euro_24, " funds"),
-    # theme = "orange", # doesnt work must change this in scss file
-    value = paste0("€", sum_all_donations_in_eur_24),
-    icon = bs_icon("cash")
-  ),
-  value_box(
-    title = paste0("Total amount raised in US Dollars from ", num_funds_usd, " funds"),
+    title = paste0("Total amount raised in US Dollars from ", num_funds_usd, " funds:"),
     # theme = "#01e2b4",
     value = paste0("$", sum_all_donations_in_usd),
     icon = bs_icon("bank")
   ),
   value_box(
-    title = paste0("Amount raised in US Dollars on ", 
-                   format(lubridate::now("UTC") - hours(7), "%B %d, %Y"),
-                   " from ", num_funds_usd_24, " funds"),
-    # theme = "orange", # doesnt work must change this in scss file
-    value = paste0("$", sum_all_donations_in_usd_24),
-    icon = bs_icon("cash")
-  ),  
-  value_box(
-    title = paste0("Total amount raised in Pounds from ", num_funds_gbp, " funds"),
+    title = paste0("Total amount raised in Pounds from ", num_funds_gbp, " funds:"),
     # theme = "primary",
     value = paste0("£", sum_all_donations_in_gbp),
     icon = "cash"
   ),
   value_box(
-    title = paste0("Amount raised in Pounds on ", 
-                   format(lubridate::now("UTC") - hours(7), "%B %d, %Y"),
-                   " from ", num_funds_gbp_24, " funds"),
-    # theme = "orange", # doesnt work must change this in scss file
-    value = paste0("£", sum_all_donations_in_gbp_24),
-    icon = bs_icon("cash")
-  ),    
-  value_box(
-    title = paste0("Total amount raised in Swedish krona from ", num_funds_sek, " funds"),
+    title = paste0("Total amount raised in Swedish krona from ", num_funds_sek, " funds:"),
     # theme = "light",
-    value = paste0("k", sum_all_donations_in_sek),
+    value = paste0("kr", sum_all_donations_in_sek),
     icon = "cash"
-  ),
-  value_box(
-    title = paste0("Amount raised in Swedish krona on ", 
-                   format(lubridate::now("UTC") - hours(7), "%B %d, %Y"),
-                   " from ", num_funds_sek_24, " funds"),
-    # theme = "orange", # doesnt work must change this in scss file
-    value = paste0("k", sum_all_donations_in_sek_24),
-    icon = bs_icon("cash")
-  )  
+  )
 )
 
 layout_column_wrap(
@@ -273,7 +249,63 @@ layout_column_wrap(
 
 ```
 
-*CLICK THRU* to donate or share
+
+#### Amount raised on `r format(lubridate::now("UTC") - lubridate::days(1), "%B %d, %Y")`
+
+```{r totals 24}
+#| column: screen
+#| color: primary
+#| theme: primary
+
+
+vbs1 <- list(
+  value_box(
+    title = paste0("Amount raised in Euros on ", format(lubridate::now("UTC") - lubridate::days(1), "%B %d, %Y"),
+                   " from ", num_funds_euro_24, " funds:"),
+    # theme = "orange", # doesnt work must change this in scss file
+    value = paste0("€", sum_all_donations_in_eur_24),
+    icon = bs_icon("cash")
+  ),
+  value_box(
+    title = paste0("Amount raised in US Dollars on ", 
+                   format(lubridate::now("UTC") - lubridate::days(1), "%B %d, %Y"),
+                   " from ", num_funds_usd_24, " funds:"),
+    # theme = "orange", # doesnt work must change this in scss file
+    value = paste0("$", sum_all_donations_in_usd_24),
+    icon = bs_icon("cash")
+  ),  
+  value_box(
+    title = paste0("Amount raised in Pounds on ", 
+                   format(lubridate::now("UTC") - lubridate::days(1), "%B %d, %Y"),
+                   " from ", num_funds_gbp_24, " funds:"),
+    # theme = "orange", # doesnt work must change this in scss file
+    value = paste0("£", sum_all_donations_in_gbp_24),
+    icon = bs_icon("cash")
+  ),    
+  value_box(
+    title = paste0("Amount raised in Swedish krona on ", 
+                   format(lubridate::now("UTC") - lubridate::days(1), "%B %d, %Y"),
+                   " from ", num_funds_sek_24, " funds:"),
+    # theme = "orange", # doesnt work must change this in scss file
+    value = paste0("kr", sum_all_donations_in_sek_24),
+    icon = bs_icon("cash")
+  )  
+)
+
+layout_column_wrap(
+  width = "250px",
+  fixed_width = TRUE,
+  !!!vbs1
+)
+
+```
+
+
+[Link to latest currency conversion rates](https://www.bloomberg.com/markets/currencies)
+
+<br>
+
+##### *CLICK THRU* to donate or share
 
 Table below updated on `r format(lubridate::now("UTC") - hours(7), "%B %d, %Y")` at `r paste0(format(lubridate::now("UTC") - hours(7), "%I:%M %p"), " PST") `
 
@@ -381,8 +413,8 @@ final_table %>%
     total_num_donations = "Number of total donations",
     amount_raised_num = "Total amount raised",
     percent_of_goal = "Percent of goal reached",
-    total_num_donations_24_hours = paste0("Number of donations on ",format(lubridate::now("UTC") - hours(7), "%B %d")),
-    money_raised_24_hours = paste0("Amount raised on ",format(lubridate::now("UTC") - hours(7), "%B %d")),
+    total_num_donations_24_hours = paste0("Number of donations on ", format(lubridate::now("UTC") - lubridate::days(1), "%B %d")),
+    money_raised_24_hours = paste0("Amount raised on ", format(lubridate::now("UTC") - lubridate::days(1), "%B %d")),
     # uuid = "QR Code",
     link = "Link to GoFundMe"
     # total_num_donations_last_20 = "Number of donations",
