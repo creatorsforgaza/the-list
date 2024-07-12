@@ -62,7 +62,7 @@ end_word <- 'suggested_donation_stats'
 
 # function for polite scraping
 polite_scraping <- politely(rvest::read_html,
-                            paste0("Hello! I'm a polite ", getOption("HTTPUserAgent"), " bot"))  
+                            paste0("Hello! I'm a polite ", getOption("HTTPUserAgent"), " user"))  
 
 #### trying out polite ----
 for(i in 1:num_funds){
@@ -80,7 +80,7 @@ for(i in 1:num_funds){
   # }
   # 
   # # Add a random delay between 1 to 15 seconds
-  random_delay <- runif(1, 30, 50)
+  random_delay <- runif(1, 10, 30)
   Sys.sleep(random_delay)
 
   
