@@ -249,7 +249,7 @@ for(i in 1:num_funds){
   Sys.sleep(random_delay)
 
   
-  link <- as.character(all_gfm_links[i,1])
+  link <- as.character(url)
   
   test_tib[i, "link"] = link
   
