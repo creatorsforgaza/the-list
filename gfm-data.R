@@ -44,6 +44,7 @@ all_gfm_links <- sheet_gaza %>%
 test_tib <- tibble(
   # campaign_title = NULL,
   link = NULL,
+  # join_code = NULL,
   money_raised = NULL,
   total_goal_amount = NULL,
   total_num_donations = NULL,
@@ -68,7 +69,7 @@ end_word <- 'suggested_donation_stats'
 #                      ~scrape(session,
 #                              query = list(f = .x)))
 
-
+# stringr::str_sub("https://www.gofundme.com/f/blah", start = 28L)
 
 # function for polite scraping
 polite_scraping <- politely(rvest::read_html)  

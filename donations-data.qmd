@@ -55,13 +55,14 @@ final_table <-  x %>%
     TRUE ~ NA_character_
   )) %>% 
   dplyr::mutate(percent_of_goal = amount_raised_num / total_goal_amount*100) %>% 
+  dplyr::mutate(fund_parameter = str_sub(link, start = 28L)) %>% 
   dplyr::left_join(sheet_gaza %>% 
-                     dplyr::select(1:2, Status, links),
-                   by = c("link" = "links")) %>% 
+                     dplyr::select(1:2, Status, fund_parameter = `fund parameter`),
+                   by = "fund_parameter") %>% 
   dplyr::arrange(desc(Status), percent_of_goal) %>%  
   dplyr::mutate(link_text = str_wrap(`GFM LINK`, width = 18)) %>% 
-  dplyr::mutate(uuid = str_sub(link, start = 19L)) %>% 
-  dplyr::select(uuid, link, link_text,
+  # dplyr::mutate(uuid = str_sub(link, start = 19L)) %>% 
+  dplyr::select(link, link_text,
                 total_num_donations,currency_abv, amount_raised_num, 
                 percent_of_goal, 
                 total_num_donations_24_hours:money_raised_24_hours)
@@ -323,7 +324,7 @@ link_text <- final_table %>%
 
 final_table %>% 
   dplyr::select(-c(link_text)) %>% 
-  dplyr::relocate(uuid, .before = link) %>% 
+  # dplyr::relocate(uuid, .before = link) %>% 
   gt(
     # rowname_col = "row_n"
     ) %>%
