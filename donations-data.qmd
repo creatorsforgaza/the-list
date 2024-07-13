@@ -378,7 +378,7 @@ final_table %>%
     label_cutoff = 0.1
   ) %>%   
   gt::cols_hide(
-    c(currency_abv, uuid)
+    c(currency_abv)
   ) %>%
   # gt::tab_spanner(
   #   columns = c(total_num_donations_24_hours, money_raised_24_hours),
