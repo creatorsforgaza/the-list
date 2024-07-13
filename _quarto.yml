@@ -7,7 +7,7 @@ website:
   page-navigation: true
   back-to-top-navigation: true
   navbar:
-    logo: images/cfg-logo-new.jpg
+    logo: images/joint-logo.JPG
     left:
       - href: index.qmd
         text: Home
