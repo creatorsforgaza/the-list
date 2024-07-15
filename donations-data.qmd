@@ -377,7 +377,7 @@ final_table %>%
     font_size = "13px",
     decimals = 0,
     scaled = TRUE,
-    label_cutoff = 0.1
+    label_cutoff = 0
   ) %>%   
   gt::cols_hide(
     c(currency_abv)
