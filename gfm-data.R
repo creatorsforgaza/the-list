@@ -35,7 +35,7 @@ sheet_gaza <- read_sheet(ss)
 all_gfm_links <- sheet_gaza %>% 
   # removing fund with broken link for now
   janitor::clean_names() %>% 
-  dplyr::filter(person_family != "Jenna/Hashem",
+  dplyr::filter(!person_family %in% c("Jenna/Hashem", "Hamza and Family"),
                 status != "CLOSED / NOT ACCEPTING DONATIONS") %>%   
   dplyr::filter(str_detect(links, "gofund"))  %>% 
   dplyr::mutate(fund_parameter = str_squish(fund_parameter)) %>% 

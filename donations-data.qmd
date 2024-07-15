@@ -42,7 +42,8 @@ source("gfm-data.R")
 #| include: false
 
 
-x <- test_tib
+x <- test_tib %>% 
+  dplyr::filter(!is.na(total_goal_amount))
 
 final_table <-  x %>% 
   dplyr::mutate(amount_raised_num = parse_number(money_raised)) %>% 
@@ -370,13 +371,13 @@ final_table %>%
   gtExtras::gt_plt_bar_pct(
     column = percent_of_goal,
     labels = TRUE,
+    scaled = TRUE,    
     fill = "#01e2b4",
     height = 26,
-    width = 126,
+    width = 132,
     font_style = "bold",
     font_size = "13px",
     decimals = 0,
-    scaled = TRUE,
     label_cutoff = 0
   ) %>%   
   gt::cols_hide(
