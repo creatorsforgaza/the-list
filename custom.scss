@@ -42,7 +42,9 @@ body {
 .navbar {
   background-color: $theme-medium-gray;
   color: $theme-text-color;
+  height: 50px;
 }
+
 :root {
   --bs-body-bg: $theme-darkest-gray !important;
   --bs-card-bg: $theme-darkest-gray !important;
@@ -107,6 +109,11 @@ a {
 /* Bold navbar title */
 .navbar-title {
   font-weight: bold;
+  height: 100px;
+}
+
+.navbar-icon {
+  height: 100px;
 }
 
 /* Height of embedded Spotify Web Player */

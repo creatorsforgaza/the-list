@@ -11,7 +11,7 @@ format:
 
 ::: {.card expandable="false"}
 ::: {style="background-color: #01e2b4; text-align: center; display: flex; align-items: center; justify-content: center; height: 100%;"}
-[ [CREATOR SIGN-UP](https://docs.google.com/forms/d/e/1FAIpQLScYuzqzaIqmwyrlOzvf5K7WgbYhIibNZPVFQan4BFJ9UU6XSg/viewform) ]{style="font-size: 2vw; width: 100%; height: 200px"}
+[[CREATOR SIGN-UP](https://docs.google.com/forms/d/e/1FAIpQLScYuzqzaIqmwyrlOzvf5K7WgbYhIibNZPVFQan4BFJ9UU6XSg/viewform)]{style="font-size: clamp(1.5rem, 3.5vw, 2.4rem); width: 100%; height: 200px"}
 :::
 :::
 
@@ -23,7 +23,7 @@ format:
 
 ::: {.card expandable="false"}
 ::: {style="background-color: #01e2b4; color: black; text-align: center; display: flex; align-items: center; justify-content: center; height: 100%;"}
-[ [AMPLIFIER SIGN-UP](https://docs.google.com/forms/d/e/1FAIpQLSfwvxWeJ7V1FhzguYOP9lAkZ_SB8LogzT5e5pi_izvhm3mGQQ/viewform) ]{style="font-size: 2vw; width: 100%; height: 500px"}
+[[AMPLIFIER SIGN-UP](https://docs.google.com/forms/d/e/1FAIpQLSfwvxWeJ7V1FhzguYOP9lAkZ_SB8LogzT5e5pi_izvhm3mGQQ/viewform)]{style="font-size: clamp(1.5rem, 3.5vw, 2.4rem); width: 100%; height: 500px"}
 :::
 :::
 
@@ -31,4 +31,4 @@ format:
 
 <br>
 
-![](images/screenshots3.jpg){fig-align="center"}
+[![](images/screenshots3.jpg){fig-align="center"}](https://www.instagram.com/creatorsforgaza/)

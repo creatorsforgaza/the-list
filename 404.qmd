@@ -1,0 +1,9 @@
+---
+title: "Page Not Found"
+---
+
+[![](images/joint-logo.JPG){fig-align="center"}](https://creatorsforgaza.github.io/the-list/)
+
+**Sorry, the page you requested cannot be found.**
+
+[Click here to return to the Creators for Gaza homepage](https://creatorsforgaza.github.io/the-list/)

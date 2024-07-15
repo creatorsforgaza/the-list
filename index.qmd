@@ -1,7 +1,7 @@
 ---
 title: |
   JOIN US IN HELPING \
-  OUR PALESTINIAN FAMILIES ESCAPE THE GENOCIDE
+  OUR PALESTINIAN FAMILIES SURVIVE THE GENOCIDE
 execute:
   message: false
   error: false
@@ -32,23 +32,21 @@ format:
 
 ```
 
-### We are a SWANA-led global collective of creators amplifying the fundraising campaigns of our loved ones fleeing the onslaught in Gaza.
+## We are a SWANA-led global collective of creators amplifying the fundraising campaigns of our loved ones fleeing the onslaught in Gaza.
 
 <br>
 
 ::: {.card expandable="false"}
 ::: {style="background-color: #01e2b4; text-align: center; display: flex; align-items: center; justify-content: center; height: 100%;"}
-[[CREATOR/AMPLIFIER SIGN-UP: Get a family assignment](https://creatorsforgaza.github.io/the-list/volunteer.html)]{style="font-size: 2vw; width: 100%; height: 200px"}
+[[CREATOR/AMPLIFIER SIGN-UP: Get a family assignment](https://creatorsforgaza.github.io/the-list/volunteer.html)]{style="font-size: clamp(1.5rem, 3.5vw, 2.4rem); width: 100%; height: 200px"}
 :::
 :::
-
-<br>
 
 <br>
 
 ::: {.card expandable="false"}
 ::: {style="background-color: #01e2b4; color: black; text-align: center; display: flex; align-items: center; justify-content: center; height: 100%;"}
-[[OUR GAZAN FAMILIES: Donate or share the list](https://docs.google.com/document/d/1c0K0nP6VQ2PrCM_2ggLFdfHIH0y4j4t4X4I9dxx7VyU/mobilebasic)]{style="font-size: 2vw; width: 100%; height: 200px"}
+[[OUR GAZAN FAMILIES: Donate or share the list](https://docs.google.com/document/d/1c0K0nP6VQ2PrCM_2ggLFdfHIH0y4j4t4X4I9dxx7VyU/mobilebasic)]{style="font-size: clamp(1.5rem, 3.5vw, 2.4rem); width: 100%; height: 100%"}
 :::
 :::
 
@@ -56,4 +54,4 @@ format:
 
 ## **YALLA WE NEED YOU**
 
-![](images/screenshots1.jpg){fig-align="center"}
+[![](images/screenshots1.jpg){fig-align="center"}](https://www.instagram.com/creatorsforgaza/)

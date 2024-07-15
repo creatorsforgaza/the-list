@@ -30,7 +30,7 @@ library(gtExtras)
 
 
 ```{r}
-## | cache: true
+##| cache: true
 
 source("gfm-data.R")
 
@@ -56,19 +56,21 @@ final_table <-  x %>%
   )) %>% 
   dplyr::mutate(percent_of_goal = amount_raised_num / total_goal_amount*100) %>% 
   dplyr::mutate(fund_parameter = str_sub(link, start = 28L)) %>% 
-  dplyr::left_join(sheet_gaza %>% 
-                     dplyr::select(1:2, Status, fund_parameter = `fund parameter`),
+  dplyr::left_join( sheet_gaza %>% 
+                      # removing fund with broken link for now
+                      janitor::clean_names() %>% 
+                     dplyr::select(1:2, status, fund_parameter),
                    by = "fund_parameter") %>% 
-  dplyr::arrange(desc(Status), percent_of_goal) %>%  
-  dplyr::mutate(link_text = str_wrap(`GFM LINK`, width = 18)) %>% 
+  dplyr::arrange(desc(status), percent_of_goal) %>%  
+  dplyr::mutate(link_text = str_wrap(gfm_link, width = 18)) %>% 
   # dplyr::mutate(uuid = str_sub(link, start = 19L)) %>% 
   dplyr::select(link, link_text,
                 total_num_donations,currency_abv, amount_raised_num, 
                 percent_of_goal, 
                 total_num_donations_24_hours:money_raised_24_hours)
 
-date <- format(lubridate::floor_date(Sys.Date(), unit = 'day'), format = '%Y-%m-%d')
-readr::write_csv(final_table , glue::glue('data/final-table-{date}.csv'))
+# date <- format(lubridate::floor_date(Sys.Date(), unit = 'day'), format = '%Y-%m-%d')
+# readr::write_csv(final_table , glue::glue('data/final-table-{date}.csv'))
 
 ```
 
