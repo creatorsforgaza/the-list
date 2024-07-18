@@ -70,8 +70,8 @@ final_table <-  x %>%
                 percent_of_goal, 
                 total_num_donations_24_hours:money_raised_24_hours)
 
-# date <- format(lubridate::floor_date(Sys.Date(), unit = 'day'), format = '%Y-%m-%d')
-# readr::write_csv(final_table , glue::glue('data/final-table-{date}.csv'))
+date <- format(lubridate::floor_date(Sys.Date(), unit = 'day'), format = '%Y-%m-%d')
+readr::write_csv(final_table , glue::glue('data/final-table-{date}.csv'))
 
 ```
 
