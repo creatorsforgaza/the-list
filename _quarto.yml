@@ -4,10 +4,10 @@ project:
 website:
   title: "CREATORS\nFOR GAZA"
   favicon: images/cfg-logo-new.jpg
-  page-navigation: true
   back-to-top-navigation: true
   navbar:
     logo: images/joint-logo.JPG
+    pinned: true
     left:
       - href: index.qmd
         text: Home
@@ -29,6 +29,7 @@ format:
   html:
     theme: [cosmo, custom.scss]
     toc: true
+    smooth-scroll: true
 
 
 
