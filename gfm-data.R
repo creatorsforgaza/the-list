@@ -42,12 +42,14 @@ all_gfm_links <- sheet_gaza %>%
   dplyr::select(fund_parameter)
 
 
+###### test tib -----
 test_tib <- tibble(
   # campaign_title = NULL,
   link = NULL,
   # join_code = NULL,
   money_raised = NULL,
   total_goal_amount = NULL,
+  is_canadian = NULL,
   total_num_donations = NULL,
   total_num_donations_24_hours = NULL,
   money_raised_24_hours = NULL
@@ -267,6 +269,8 @@ for(i in 1:num_funds){
   total_goal = read_html_func %>%
     html_elements(css = ".hrt-text-body-sm") %>%
     html_text()
+  
+  test_tib[i, "is_canadian"] = stringr::str_detect(total_goal[1], "CAD")
   
   test_tib[i, "total_goal_amount"] = readr::parse_number(total_goal[1])
   

@@ -49,10 +49,13 @@ final_table <-  x %>%
   dplyr::mutate(amount_raised_num = parse_number(money_raised)) %>% 
   dplyr::mutate(currency = str_extract(money_raised, "[€|$|kr|£]")) %>% 
   dplyr::mutate(currency_abv = dplyr::case_when(
-    currency == "$" ~ "USD",
+    currency == "$" & is_canadian == FALSE ~ "USD",
+    currency == "$" & is_canadian == TRUE ~ "CAD",    
     currency == "€" ~ "EUR",
     currency == "£" ~ "GBP",
-    currency == "k" ~ "SEK",
+    currency == "k" & link == 
+      "https://www.gofundme.com/f/4-months-separates-between-life-and-death-and-we" ~ "SEK",
+    currency == "k" & link == "https://www.gofundme.com/f/help-my-sister-and-her-family-escape-the-war-in-gaza" ~ "NOK",
     TRUE ~ NA_character_
   )) %>% 
   dplyr::mutate(percent_of_goal = amount_raised_num / total_goal_amount*100) %>% 
@@ -70,8 +73,8 @@ final_table <-  x %>%
                 percent_of_goal, 
                 total_num_donations_24_hours:money_raised_24_hours)
 
-date <- format(lubridate::floor_date(Sys.Date(), unit = 'day'), format = '%Y-%m-%d')
-readr::write_csv(final_table , glue::glue('data/final-table-{date}.csv'))
+# date <- format(lubridate::floor_date(Sys.Date(), unit = 'day'), format = '%Y-%m-%d')
+# readr::write_csv(final_table , glue::glue('data/final-table-{date}.csv'))
 
 ```
 
@@ -85,6 +88,18 @@ sum_all_donations_in_usd <- final_table %>%
 
 sum_all_donations_in_usd_24 <- final_table %>%
   dplyr::filter(currency_abv == "USD") %>% 
+  summarise(sum(money_raised_24_hours)) %>%
+  as.numeric() %>%
+  format(big.mark = ",")
+
+sum_all_donations_in_cad <- final_table %>%
+  dplyr::filter(currency_abv == "CAD") %>% 
+  summarise(sum(amount_raised_num)) %>%
+  as.numeric() %>%
+  format(big.mark = ",")
+
+sum_all_donations_in_cad_24 <- final_table %>%
+  dplyr::filter(currency_abv == "CAD") %>% 
   summarise(sum(money_raised_24_hours)) %>%
   as.numeric() %>%
   format(big.mark = ",")
@@ -126,12 +141,33 @@ sum_all_donations_in_sek_24 <- final_table %>%
   as.numeric() %>%
   format(big.mark = ",")
 
+sum_all_donations_in_nok <- final_table %>%
+  dplyr::filter(currency_abv == "NOK") %>% 
+  summarise(sum(amount_raised_num)) %>%
+  as.numeric() %>%
+  format(big.mark = ",")
+
+sum_all_donations_in_nok_24 <- final_table %>%
+  dplyr::filter(currency_abv == "NOK") %>% 
+  summarise(sum(money_raised_24_hours)) %>%
+  as.numeric() %>%
+  format(big.mark = ",")
+
 num_funds_usd <- final_table %>%
   dplyr::filter(currency_abv == "USD") %>% 
   nrow()
 
 num_funds_usd_24 <- final_table %>%
   dplyr::filter(currency_abv == "USD") %>% 
+  dplyr::filter(money_raised_24_hours > 0.01) %>% 
+  nrow()
+
+num_funds_cad <- final_table %>%
+  dplyr::filter(currency_abv == "CAD") %>% 
+  nrow()
+
+num_funds_cad_24 <- final_table %>%
+  dplyr::filter(currency_abv == "CAD") %>% 
   dplyr::filter(money_raised_24_hours > 0.01) %>% 
   nrow()
 
@@ -159,6 +195,15 @@ num_funds_sek <- final_table %>%
 
 num_funds_sek_24 <- final_table %>%
   dplyr::filter(currency_abv == "SEK") %>% 
+  dplyr::filter(money_raised_24_hours > 0.01) %>% 
+  nrow()
+
+num_funds_nok <- final_table %>%
+  dplyr::filter(currency_abv == "NOK") %>% 
+  nrow()
+
+num_funds_nok_24 <- final_table %>%
+  dplyr::filter(currency_abv == "NOK") %>% 
   dplyr::filter(money_raised_24_hours > 0.01) %>% 
   nrow()
 
@@ -232,7 +277,13 @@ vbs <- list(
     icon = bs_icon("bank")
   ),
   value_box(
-    title = paste0("Total amount raised in Pounds from ", num_funds_gbp, " funds:"),
+    title = paste0("Total amount raised in Canadian Dollars from ", num_funds_cad, " funds:"),
+    # theme = "#01e2b4",
+    value = paste0("$", sum_all_donations_in_cad),
+    icon = bs_icon("bank")
+  ),  
+  value_box(
+    title = paste0("Total amount raised in British Pounds from ", num_funds_gbp, " funds:"),
     # theme = "primary",
     value = paste0("£", sum_all_donations_in_gbp),
     icon = "cash"
@@ -242,7 +293,13 @@ vbs <- list(
     # theme = "light",
     value = paste0("kr", sum_all_donations_in_sek),
     icon = "cash"
-  )
+  ),
+  value_box(
+    title = paste0("Total amount raised in Norwegian krone from ", num_funds_nok, " funds:"),
+    # theme = "light",
+    value = paste0("kr", sum_all_donations_in_nok),
+    icon = "cash"
+  )  
 )
 
 layout_column_wrap(
@@ -279,7 +336,15 @@ vbs1 <- list(
     icon = bs_icon("cash")
   ),  
   value_box(
-    title = paste0("Amount raised in Pounds on ", 
+    title = paste0("Amount raised in Canadian Dollars on ", 
+                   format(lubridate::now("UTC") - lubridate::days(1), "%B %d, %Y"),
+                   " from ", num_funds_cad_24, " funds:"),
+    # theme = "orange", # doesnt work must change this in scss file
+    value = paste0("$", sum_all_donations_in_cad_24),
+    icon = bs_icon("cash")
+  ),    
+  value_box(
+    title = paste0("Amount raised in British Pounds on ", 
                    format(lubridate::now("UTC") - lubridate::days(1), "%B %d, %Y"),
                    " from ", num_funds_gbp_24, " funds:"),
     # theme = "orange", # doesnt work must change this in scss file
@@ -292,6 +357,14 @@ vbs1 <- list(
                    " from ", num_funds_sek_24, " funds:"),
     # theme = "orange", # doesnt work must change this in scss file
     value = paste0("kr", sum_all_donations_in_sek_24),
+    icon = bs_icon("cash")
+  ),
+  value_box(
+    title = paste0("Amount raised in Norwegian krone on ", 
+                   format(lubridate::now("UTC") - lubridate::days(1), "%B %d, %Y"),
+                   " from ", num_funds_nok_24, " funds:"),
+    # theme = "orange", # doesnt work must change this in scss file
+    value = paste0("kr", sum_all_donations_in_nok_24),
     icon = bs_icon("cash")
   )  
 )
@@ -412,6 +485,12 @@ final_table %>%
     align = "right",
     columns = total_num_donations
   ) %>% 
+  ### ADD A FOOTNOTE HERE!!!
+  # tab_footnote(
+  #   footnote = "Information from these columns represents the 24 hour perido between date (do a paste0 of dates here",
+  #   locations = cells_column_labels(columns = c(total_num_donations_24_hours,
+  #                                               money_raised_24_hours))
+  # ) %>% 
   gt::cols_label(
     # campaign_title = "Fundraiser",
     total_num_donations = "Number of total donations",
