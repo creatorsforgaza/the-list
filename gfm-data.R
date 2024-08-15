@@ -9,6 +9,7 @@ library(polite)
 
 
 
+
 drive_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
 
 gs4_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
@@ -80,21 +81,42 @@ for(i in 1:num_funds){
   test_tib[i, "link"] = link
   
   
+  # mr_td =  read_html_func %>%
+  #   html_elements(css = ".hrt-text-body-lg") %>%
+  #   html_text()
+  # 
+  # test_tib[i, "money_raised"] = mr_td[1]
+  # 
+  # test_tib[i, "total_num_donations"] = stringr::str_sub(mr_td[2], start = 2L, end = -2L)
+  # 
+  # total_goal = read_html_func %>%
+  #   html_elements(css = ".hrt-text-body-sm") %>%
+  #   html_text()
+  # 
+  # test_tib[i, "is_canadian"] = stringr::str_detect(total_goal[1], "CAD")
+  # 
+  # test_tib[i, "total_goal_amount"] = readr::parse_number(total_goal[1])
+  
+  
   mr_td =  read_html_func %>%
     html_elements(css = ".hrt-disp-inline") %>%
     html_text()
   
-  test_tib[i, "money_raised"] = mr_td[1]
-  
-  test_tib[i, "total_num_donations"] = stringr::str_sub(mr_td[2], start = 2L, end = -2L)
+  # changed and good
+  test_tib[i, "total_num_donations"] = stringr::str_sub(mr_td[1], start = 2L, end = -2L)
   
   total_goal = read_html_func %>%
     html_elements(css = ".hrt-text-body-sm") %>%
     html_text()
   
+  # changed and good
+  test_tib[i, "money_raised"] = stringr::str_extract(total_goal[1], "^[^ ]+")
+  
+  # didnt change and good
   test_tib[i, "is_canadian"] = stringr::str_detect(total_goal[1], "CAD")
   
-  test_tib[i, "total_goal_amount"] = readr::parse_number(total_goal[1])
+  # changed and good
+  test_tib[i, "total_goal_amount"] = readr::parse_number(str_extract(total_goal[1], "(?<=raised of )\\$[\\d,]+"))  
   
   ### 20 most recent donations
   most_recent_donations = read_html_func %>%
