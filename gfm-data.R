@@ -116,7 +116,7 @@ for(i in 1:num_funds){
   test_tib[i, "is_canadian"] = stringr::str_detect(total_goal[1], "CAD")
   
   # changed and good
-  test_tib[i, "total_goal_amount"] = readr::parse_number(str_extract(total_goal[1], "(?<=raised of )\\$[\\d,]+"))  
+  test_tib[i, "total_goal_amount"] = readr::parse_number(str_extract(total_goal[1], "(?<=raised of ).*?(?= goal)"))  
   
   ### 20 most recent donations
   most_recent_donations = read_html_func %>%
@@ -163,5 +163,56 @@ for(i in 1:num_funds){
   
 }
 
-
-
+# url = paste0("https://www.gofundme.com/f/help-my-sister-and-her-family-escape-the-war-in-gaza")
+# 
+# 
+# read_html_func <- polite_scraping(url)
+# 
+# # # Add a random delay between 1 to 15 seconds
+# random_delay <- runif(1, 10, 20)
+# Sys.sleep(random_delay)
+# 
+# 
+# link <- as.character(url)
+# 
+# test_tib[i, "link"] = link
+# 
+# 
+# # mr_td =  read_html_func %>%
+# #   html_elements(css = ".hrt-text-body-lg") %>%
+# #   html_text()
+# # 
+# # test_tib[i, "money_raised"] = mr_td[1]
+# # 
+# # test_tib[i, "total_num_donations"] = stringr::str_sub(mr_td[2], start = 2L, end = -2L)
+# # 
+# # total_goal = read_html_func %>%
+# #   html_elements(css = ".hrt-text-body-sm") %>%
+# #   html_text()
+# # 
+# # test_tib[i, "is_canadian"] = stringr::str_detect(total_goal[1], "CAD")
+# # 
+# # test_tib[i, "total_goal_amount"] = readr::parse_number(total_goal[1])
+# 
+# 
+# # mr_td =  read_html_func %>%
+# #   html_elements(css = ".hrt-disp-inline") %>%
+# #   html_text()
+# # 
+# # # changed and good
+# # test_tib[i, "total_num_donations"] = stringr::str_sub(mr_td[1], start = 2L, end = -2L)
+# # 
+# # total_goal = read_html_func %>%
+# #   html_elements(css = ".hrt-text-body-sm") %>%
+# #   html_text()
+# # 
+# # # changed and good
+# # test_tib[i, "money_raised"] = stringr::str_extract(total_goal[1], "^[^ ]+")
+# # 
+# # # didnt change and good
+# # test_tib[i, "is_canadian"] = stringr::str_detect(total_goal[1], "CAD")
+# # 
+# # # changed and good
+# # # test_tib[i, "total_goal_amount"] = readr::parse_number(str_extract(total_goal[1], "(?<=raised of )\\$[\\d,]+|(?<=raised of )\\€[\\d,]+|(?<=raised of )\\£[\\d,]+|(?<=raised of )\\kr[\\d,]+"))  
+# # 
+# # test_tib[i, "total_goal_amount"] = readr::parse_number(str_extract(total_goal[1], "(?<=raised of ).*?(?= goal)"))  
