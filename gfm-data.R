@@ -7,7 +7,8 @@ library(gt)
 library(gtExtras)
 library(polite)
 
-
+# drive_auth(path = ".secrets/client_secret.json")
+# gs4_auth(path = ".secrets/client_secret.json")
 
 
 drive_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
@@ -149,8 +150,7 @@ for(i in 1:num_funds){
       created_at, start = 6L, end = -12L
     ))) %>%
     tidyr::separate(other, c("name", "other"), sep = "profile_url") %>%
-    dplyr::mutate(name = str_sub(name, start = 6L, end = -6L)) %>%
-    dplyr::select(-other) 
+    dplyr::mutate(name = str_sub(name, start = 6L, end = -6L)) 
   
   test_tib[i, "total_num_donations_24_hours"] = twenty_most_recent_donations %>%
     dplyr::filter((now(tzone = "UTC") - hours(7)) - hours(24) <= created_at) %>%

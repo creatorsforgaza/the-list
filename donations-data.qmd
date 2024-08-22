@@ -31,6 +31,15 @@ library(gtExtras)
 
 ```{r}
 ##| cache: true
+# 
+# source("gfm-data.R")
+
+```
+
+
+
+```{r}
+##| cache: true
 
 source("gfm-data.R")
 
