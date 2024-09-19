@@ -30,6 +30,9 @@ all_gfm_links <- sheet_gaza %>%
   dplyr::mutate(fund_parameter = str_squish(fund_parameter)) %>% 
   dplyr::select(fund_parameter)
 
+#### testing grabbing data from sheet ----
+
+
 
 ###### test tib -----
 test_tib <- tibble(
@@ -39,9 +42,9 @@ test_tib <- tibble(
   money_raised = NULL,
   total_goal_amount = NULL,
   is_canadian = NULL,
-  total_num_donations = NULL,
-  total_num_donations_24_hours = NULL,
-  money_raised_24_hours = NULL
+  total_num_donations = NULL
+  # total_num_donations_24_hours = NULL,
+  # money_raised_24_hours = NULL
   # total_num_donations_last_20 = NULL,
   # money_raised_last_20 = NULL,
   # num_days_last_20 = NULL
@@ -120,50 +123,55 @@ for(i in 1:num_funds){
   #   unlist()
   
   #### new method to get 20 most recent donations
-  most_recent_donations = read_html_func %>%
-    html_text() %>% 
-    enframe() %>% 
-    dplyr::mutate(result =
-                    str_match_all(value,
-                                  paste0("(?s)",
-                                         start_word,
-                                         "(.*?)",
-                                         end_word))) %>%
-    dplyr::select(result) %>%
-    unlist() %>% 
-    enframe() %>% 
-    dplyr::mutate(result = stringr::str_to_lower(value))    
+  # most_recent_donations = read_html_func %>%
+  #   html_text() %>% 
+  #   enframe() %>% 
+  #   dplyr::mutate(result =
+  #                   str_match_all(value,
+  #                                 paste0("(?s)",
+  #                                        start_word,
+  #                                        "(.*?)",
+  #                                        end_word))) %>%
+  #   dplyr::select(result) %>%
+  #   unlist() %>% 
+  #   enframe() %>% 
+  #   dplyr::mutate(result = stringr::str_to_lower(value))    
 
-  twenty_most_recent_donations = most_recent_donations[[2]][1] %>%
-    tibble::enframe() %>%
-    tidyr::separate_longer_delim(value, delim = "donation_id") %>%
-    dplyr::filter(row_number() != 1) %>%
-    tidyr::separate(value, c("donation_id", "other"), sep = "amount") %>%
-    dplyr::mutate(donation_id = readr::parse_number(donation_id)) %>%
-    tidyr::separate(other, c("amount", "other"), sep = "is_offline") %>%
-    dplyr::mutate(amount = readr::parse_number(amount)) %>%
-    tidyr::separate(other, c("name", "other"), sep = "created_at") %>%
-    dplyr::select(-name) %>%
-    tidyr::separate(other, c("created_at", "other"), sep = "name") %>%
-    dplyr::mutate(created_at = readr::parse_datetime(str_sub(
-      created_at, start = 6L, end = -12L
-    ))) %>%
-    tidyr::separate(other, c("name", "other"), sep = "profile_url") %>%
-    dplyr::mutate(name = str_sub(name, start = 6L, end = -6L))
-
-  test_tib[i, "total_num_donations_24_hours"] = twenty_most_recent_donations %>%
-    dplyr::filter((now(tzone = "UTC") - hours(7)) - hours(24) <= created_at) %>%
-    dplyr::summarise(num_donations = n()) %>%
-    dplyr::pull(num_donations)
-
-  test_tib[i, "money_raised_24_hours"] = twenty_most_recent_donations %>%
-    dplyr::filter((now(tzone = "UTC") - hours(7)) - hours(24) <= created_at) %>%
-    dplyr::summarise(total_donations_amount = sum(amount)) %>%
-    dplyr::pull(total_donations_amount)
+  # twenty_most_recent_donations = most_recent_donations[[2]][1] %>%
+  #   tibble::enframe() %>%
+  #   tidyr::separate_longer_delim(value, delim = "donation_id") %>%
+  #   dplyr::filter(row_number() != 1) %>%
+  #   tidyr::separate(value, c("donation_id", "other"), sep = "amount") %>%
+  #   dplyr::mutate(donation_id = readr::parse_number(donation_id)) %>%
+  #   tidyr::separate(other, c("amount", "other"), sep = "is_offline") %>%
+  #   dplyr::mutate(amount = readr::parse_number(amount)) %>%
+  #   tidyr::separate(other, c("name", "other"), sep = "created_at") %>%
+  #   dplyr::select(-name) %>%
+  #   tidyr::separate(other, c("created_at", "other"), sep = "name") %>%
+  #   dplyr::mutate(created_at = readr::parse_datetime(str_sub(
+  #     created_at, start = 6L, end = -12L
+  #   ))) %>%
+  #   tidyr::separate(other, c("name", "other"), sep = "profile_url") %>%
+  #   dplyr::mutate(name = str_sub(name, start = 6L, end = -6L))
+  # 
+  # test_tib[i, "total_num_donations_24_hours"] = twenty_most_recent_donations %>%
+  #   dplyr::filter((now(tzone = "UTC") - hours(7)) - hours(24) <= created_at) %>%
+  #   dplyr::summarise(num_donations = n()) %>%
+  #   dplyr::pull(num_donations)
+  # 
+  # test_tib[i, "money_raised_24_hours"] = twenty_most_recent_donations %>%
+  #   dplyr::filter((now(tzone = "UTC") - hours(7)) - hours(24) <= created_at) %>%
+  #   dplyr::summarise(total_donations_amount = sum(amount)) %>%
+  #   dplyr::pull(total_donations_amount)
 
 
   
 }
+# 
+# test_tib %>% 
+#   dplyr::mutate(join_link = str_sub(link, start = 28L)) %>% 
+#   dplyr::left_join(daily_numbers,
+#                    join_by(join_link == link))
 
 ##### ----- troubleshooting for Error in most_recent_donations[[2]] : subscript out of bounds on August 29, 2024
 
