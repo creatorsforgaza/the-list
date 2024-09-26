@@ -67,8 +67,8 @@ start_word_total_goal = 'isGfmDotOrgFund'
 end_word_total_goal = 'goalDeadline'
 
 ### for the current money raised
-start_word_current_amount = 'amountRaisedUnattributedNumber'
-end_word_current_amount = 'numberOfDonationsUnattributed'
+start_word_current_amount = 'currentAmount'
+end_word_current_amount = 'fundraiserPhoto'
 
 
 
@@ -186,6 +186,27 @@ for(i in 1:num_funds){
 }
 
 # troubleshoot why total_goal amount isnt working
+# 
+# read_html_func <- polite_scraping(url)
+# 
+# 
+# read_html_func %>%
+#   html_text() %>%
+#   enframe() %>%
+#   dplyr::mutate(result =
+#                   str_match_all(value,
+#                                 paste0("(?s)",
+#                                        start_word_current_amount,
+#                                        "(.*?)",
+#                                        end_word_current_amount))) %>%
+#   dplyr::select(result) %>%
+#   unlist() %>%
+#   enframe() %>% 
+#   dplyr::mutate(current_amount = as.numeric(str_extract_all(value, "[0-9]+"))) %>% 
+#   dplyr::select(current_amount) %>% 
+#   head(n = 1) %>% 
+#   dplyr::pull(current_amount)
+# 
 # read_html_func %>%
 #   html_text() %>%
 #   enframe() %>%
@@ -203,12 +224,12 @@ for(i in 1:num_funds){
 #                                 paste0("(?s)",
 #                                        'currencyCode',
 #                                        "(.*?)",
-#                                        end_word_total_goal))) %>%  
+#                                        end_word_total_goal))) %>%
 #   dplyr::select(result) %>%
 #   unlist() %>%
-#   enframe()  %>% 
-#   dplyr::mutate(total_goal_amount = as.numeric(str_extract_all(value, "[0-9]+"))) %>% 
-#   dplyr::select(total_goal_amount) %>% 
-#   head(n = 1) %>% 
+#   enframe()  %>%
+#   dplyr::mutate(total_goal_amount = as.numeric(str_extract_all(value, "[0-9]+"))) %>%
+#   dplyr::select(total_goal_amount) %>%
+#   head(n = 1) %>%
 #   dplyr::pull(total_goal_amount)
 
