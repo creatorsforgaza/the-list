@@ -166,7 +166,16 @@ for(i in 1:num_funds){
                                          end_word_total_goal))) %>%
     dplyr::select(result) %>%
     unlist() %>%
-    enframe() %>% 
+    enframe() %>%
+    dplyr::mutate(result =
+                    str_match_all(value,
+                                  paste0("(?s)",
+                                         'currencyCode',
+                                         "(.*?)",
+                                         end_word_total_goal))) %>%  
+    dplyr::select(result) %>%
+    unlist() %>%
+    enframe()  %>% 
     dplyr::mutate(total_goal_amount = as.numeric(str_extract_all(value, "[0-9]+"))) %>% 
     dplyr::select(total_goal_amount) %>% 
     head(n = 1) %>% 
@@ -175,4 +184,31 @@ for(i in 1:num_funds){
 
   
 }
+
+# troubleshoot why total_goal amount isnt working
+# read_html_func %>%
+#   html_text() %>%
+#   enframe() %>%
+#   dplyr::mutate(result =
+#                   str_match_all(value,
+#                                 paste0("(?s)",
+#                                        start_word_total_goal,
+#                                        "(.*?)",
+#                                        end_word_total_goal))) %>%
+#   dplyr::select(result) %>%
+#   unlist() %>%
+#   enframe() %>%
+#   dplyr::mutate(result =
+#                   str_match_all(value,
+#                                 paste0("(?s)",
+#                                        'currencyCode',
+#                                        "(.*?)",
+#                                        end_word_total_goal))) %>%  
+#   dplyr::select(result) %>%
+#   unlist() %>%
+#   enframe()  %>% 
+#   dplyr::mutate(total_goal_amount = as.numeric(str_extract_all(value, "[0-9]+"))) %>% 
+#   dplyr::select(total_goal_amount) %>% 
+#   head(n = 1) %>% 
+#   dplyr::pull(total_goal_amount)
 
