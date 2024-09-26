@@ -85,18 +85,9 @@ x <- test_tib %>%
 #| include: false
 
 final_table1 <-  x %>% 
-  dplyr::mutate(amount_raised_num = parse_number(money_raised)) %>% 
-  dplyr::mutate(currency = str_extract(money_raised, "[€|$|kr|£]")) %>% 
-  dplyr::mutate(currency_abv = dplyr::case_when(
-    currency == "$" & is_canadian == FALSE ~ "USD",
-    currency == "$" & is_canadian == TRUE ~ "CAD",    
-    currency == "€" ~ "EUR",
-    currency == "£" ~ "GBP",
-    currency == "k" & link == 
-      "https://www.gofundme.com/f/4-months-separates-between-life-and-death-and-we" ~ "SEK",
-    currency == "k" & link == "https://www.gofundme.com/f/help-my-sister-and-her-family-escape-the-war-in-gaza" ~ "NOK",
-    TRUE ~ NA_character_
-  )) %>% 
+  dplyr::mutate(amount_raised_num = money_raised) %>% 
+  # dplyr::mutate(currency = str_extract(money_raised, "[€|$|kr|£]")) %>% 
+  dplyr::mutate(currency_abv = currency) %>% 
   dplyr::mutate(percent_of_goal = amount_raised_num / total_goal_amount*100) %>% 
   dplyr::mutate(fund_parameter = str_sub(link, start = 28L)) %>% 
   dplyr::left_join( sheet_gaza %>% 

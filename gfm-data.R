@@ -41,8 +41,9 @@ test_tib <- tibble(
   # join_code = NULL,
   money_raised = NULL,
   total_goal_amount = NULL,
-  is_canadian = NULL,
-  total_num_donations = NULL
+  # is_canadian = NULL,
+  total_num_donations = NULL,
+  currency = NULL
   # total_num_donations_24_hours = NULL,
   # money_raised_24_hours = NULL
   # total_num_donations_last_20 = NULL,
@@ -54,10 +55,20 @@ test_tib <- tibble(
 
 num_funds <- nrow(all_gfm_links)
 
+#### start and end words -----
+
 ### for last 20 donations
 start_word <- '\\,\\\\\"donations\\\\\"\\:\\['
 end_word <- 'suggested_donation_stats'
 
+### for the total goal amount and currencycode
+# "currencyCode\":\"USD\",\"amount\":50000},\"goalDeadline\":null,
+start_word_total_goal = 'isGfmDotOrgFund'
+end_word_total_goal = 'goalDeadline'
+
+### for the current money raised
+start_word_current_amount = 'amountRaisedUnattributedNumber'
+end_word_current_amount = 'numberOfDonationsUnattributed'
 
 
 
@@ -93,228 +104,75 @@ for(i in 1:num_funds){
   # changed and good
   test_tib[i, "total_num_donations"] = stringr::str_sub(mr_td[1], start = 2L, end = -2L)
   
-  total_goal = read_html_func %>%
-    html_elements(css = ".hrt-text-body-sm") %>%
-    html_text()
+  # total_goal = read_html_func %>%
+  #   html_elements(css = ".hrt-text-body-sm") %>%
+  #   html_text()
   
   # changed and good
-  test_tib[i, "money_raised"] = stringr::str_extract(total_goal[1], "^[^ ]+")
+  test_tib[i, "money_raised"] = read_html_func %>%
+    html_text() %>%
+    enframe() %>%
+    dplyr::mutate(result =
+                    str_match_all(value,
+                                  paste0("(?s)",
+                                         start_word_current_amount,
+                                         "(.*?)",
+                                         end_word_current_amount))) %>%
+    dplyr::select(result) %>%
+    unlist() %>%
+    enframe() %>% 
+    dplyr::mutate(current_amount = as.numeric(str_extract_all(value, "[0-9]+"))) %>% 
+    dplyr::select(current_amount) %>% 
+    head(n = 1) %>% 
+    dplyr::pull(current_amount)
   
   # didnt change and good
-  test_tib[i, "is_canadian"] = stringr::str_detect(total_goal[1], "CAD")
+  test_tib[i, "currency"] = read_html_func %>%
+    html_text() %>%
+    enframe() %>%
+    dplyr::mutate(result =
+                    str_match_all(value,
+                                  paste0("(?s)",
+                                         start_word_total_goal,
+                                         "(.*?)",
+                                         end_word_total_goal))) %>%
+    dplyr::select(result) %>%
+    unlist() %>%
+    enframe() %>% 
+    dplyr::mutate(currency = case_when(
+      str_detect(value, "USD") ~ "USD",
+      str_detect(value, "CAD") ~ "CAD",
+      str_detect(value, "GBP") ~ "GBP",
+      str_detect(value, "DKK") ~ "DKK",
+      str_detect(value, "EUR") ~ "EUR",
+      str_detect(value, "SEK") ~ "SEK",
+      TRUE ~ "Other"
+    )) %>% 
+    head(n = 1) %>% 
+    dplyr::pull(currency)
+  
   
 
   
   # changed and good in order to capture all the funds
-  test_tib[i, "total_goal_amount"] = readr::parse_number(str_extract_all(total_goal[1], "\\d{1,3}(?:,\\d{3})*")[[1]][2])
-
-  ### 20 most recent donations
-  # most_recent_donations = read_html_func %>%
-  #   html_text() %>%
-  #   enframe() %>%
-  #   dplyr::mutate(result =
-  #                   str_match_all(value,
-  #                                 paste0("(?s)",
-  #                                        start_word,
-  #                                        "(.*?)",
-  #                                        end_word))) %>%
-  #   dplyr::mutate(result = stringr::str_to_lower(result)) %>%
-  #   dplyr::select(result) %>%
-  #   unlist()
-  
-  #### new method to get 20 most recent donations
-  # most_recent_donations = read_html_func %>%
-  #   html_text() %>% 
-  #   enframe() %>% 
-  #   dplyr::mutate(result =
-  #                   str_match_all(value,
-  #                                 paste0("(?s)",
-  #                                        start_word,
-  #                                        "(.*?)",
-  #                                        end_word))) %>%
-  #   dplyr::select(result) %>%
-  #   unlist() %>% 
-  #   enframe() %>% 
-  #   dplyr::mutate(result = stringr::str_to_lower(value))    
-
-  # twenty_most_recent_donations = most_recent_donations[[2]][1] %>%
-  #   tibble::enframe() %>%
-  #   tidyr::separate_longer_delim(value, delim = "donation_id") %>%
-  #   dplyr::filter(row_number() != 1) %>%
-  #   tidyr::separate(value, c("donation_id", "other"), sep = "amount") %>%
-  #   dplyr::mutate(donation_id = readr::parse_number(donation_id)) %>%
-  #   tidyr::separate(other, c("amount", "other"), sep = "is_offline") %>%
-  #   dplyr::mutate(amount = readr::parse_number(amount)) %>%
-  #   tidyr::separate(other, c("name", "other"), sep = "created_at") %>%
-  #   dplyr::select(-name) %>%
-  #   tidyr::separate(other, c("created_at", "other"), sep = "name") %>%
-  #   dplyr::mutate(created_at = readr::parse_datetime(str_sub(
-  #     created_at, start = 6L, end = -12L
-  #   ))) %>%
-  #   tidyr::separate(other, c("name", "other"), sep = "profile_url") %>%
-  #   dplyr::mutate(name = str_sub(name, start = 6L, end = -6L))
-  # 
-  # test_tib[i, "total_num_donations_24_hours"] = twenty_most_recent_donations %>%
-  #   dplyr::filter((now(tzone = "UTC") - hours(7)) - hours(24) <= created_at) %>%
-  #   dplyr::summarise(num_donations = n()) %>%
-  #   dplyr::pull(num_donations)
-  # 
-  # test_tib[i, "money_raised_24_hours"] = twenty_most_recent_donations %>%
-  #   dplyr::filter((now(tzone = "UTC") - hours(7)) - hours(24) <= created_at) %>%
-  #   dplyr::summarise(total_donations_amount = sum(amount)) %>%
-  #   dplyr::pull(total_donations_amount)
+  test_tib[i, "total_goal_amount"] = read_html_func %>%
+    html_text() %>%
+    enframe() %>%
+    dplyr::mutate(result =
+                    str_match_all(value,
+                                  paste0("(?s)",
+                                         start_word_total_goal,
+                                         "(.*?)",
+                                         end_word_total_goal))) %>%
+    dplyr::select(result) %>%
+    unlist() %>%
+    enframe() %>% 
+    dplyr::mutate(total_goal_amount = as.numeric(str_extract_all(value, "[0-9]+"))) %>% 
+    dplyr::select(total_goal_amount) %>% 
+    head(n = 1) %>% 
+    dplyr::pull(total_goal_amount)
 
 
   
 }
-# 
-# test_tib %>% 
-#   dplyr::mutate(join_link = str_sub(link, start = 28L)) %>% 
-#   dplyr::left_join(daily_numbers,
-#                    join_by(join_link == link))
 
-##### ----- troubleshooting for Error in most_recent_donations[[2]] : subscript out of bounds on August 29, 2024
-
-
-
-# mr_td =  read_html_func %>%
-#   html_elements(css = ".hrt-text-body-lg") %>%
-#   html_text()
-# 
-# test_tib[i, "money_raised"] = mr_td[1]
-# 
-# test_tib[i, "total_num_donations"] = stringr::str_sub(mr_td[2], start = 2L, end = -2L)
-# 
-# total_goal = read_html_func %>%
-#   html_elements(css = ".hrt-text-body-sm") %>%
-#   html_text()
-# 
-# test_tib[i, "is_canadian"] = stringr::str_detect(total_goal[1], "CAD")
-# 
-# test_tib[i, "total_goal_amount"] = readr::parse_number(total_goal[1])
-
-# 
-# mr_td =  read_html_func %>%
-#   html_elements(css = ".hrt-disp-inline") %>%
-#   html_text()
-# 
-# # changed and good
-# test_tib[i, "total_num_donations"] = stringr::str_sub(mr_td[1], start = 2L, end = -2L)
-# 
-# total_goal = read_html_func %>%
-#   html_elements(css = ".hrt-text-body-sm") %>%
-#   html_text()
-# 
-# # changed and good
-# test_tib[i, "money_raised"] = stringr::str_extract(total_goal[1], "^[^ ]+")
-# 
-# # didnt change and good
-# test_tib[i, "is_canadian"] = stringr::str_detect(total_goal[1], "CAD")
-# 
-# # changed and good
-# # test_tib[i, "total_goal_amount"] = readr::parse_number(str_extract(total_goal[1], "(?<=raised of ).*?(?= goal)"))  
-# 
-# # changed and good in order to capture all the funds
-# test_tib[i, "total_goal_amount"] = readr::parse_number(str_extract_all(total_goal[1], "\\d{1,3}(?:,\\d{3})*")[[1]][2])
-# 
-# ### 20 most recent donations
-# most_recent_donations = read_html_func %>%
-#   html_text() %>% 
-#   enframe() %>% 
-#   dplyr::mutate(result =
-#                   str_match_all(value,
-#                                 paste0("(?s)",
-#                                        start_word,
-#                                        "(.*?)",
-#                                        end_word))) %>%
-#   dplyr::select(result) %>%
-#   unlist() %>% 
-#   enframe() %>% 
-#   dplyr::mutate(result = stringr::str_to_lower(value))    
-# 
-# twenty_most_recent_donations = most_recent_donations[[2]][1] %>% 
-#   tibble::enframe() %>%
-#   tidyr::separate_longer_delim(value, delim = "donation_id") %>%
-#   dplyr::filter(row_number() != 1) %>%
-#   tidyr::separate(value, c("donation_id", "other"), sep = "amount") %>%
-#   dplyr::mutate(donation_id = readr::parse_number(donation_id)) %>%
-#   tidyr::separate(other, c("amount", "other"), sep = "is_offline") %>%
-#   dplyr::mutate(amount = readr::parse_number(amount)) %>%
-#   tidyr::separate(other, c("name", "other"), sep = "created_at") %>%
-#   dplyr::select(-name) %>%
-#   tidyr::separate(other, c("created_at", "other"), sep = "name") %>%
-#   dplyr::mutate(created_at = readr::parse_datetime(str_sub(
-#     created_at, start = 6L, end = -12L
-#   ))) %>%
-#   tidyr::separate(other, c("name", "other"), sep = "profile_url") %>%
-#   dplyr::mutate(name = str_sub(name, start = 6L, end = -6L)) 
-# 
-# test_tib[i, "total_num_donations_24_hours"] = twenty_most_recent_donations %>%
-#   dplyr::filter((now(tzone = "UTC") - hours(7)) - hours(24) <= created_at) %>%
-#   dplyr::summarise(num_donations = n()) %>% 
-#   dplyr::pull(num_donations)
-# 
-# test_tib[i, "money_raised_24_hours"] = twenty_most_recent_donations %>%
-#   dplyr::filter((now(tzone = "UTC") - hours(7)) - hours(24) <= created_at) %>%
-#   dplyr::summarise(total_donations_amount = sum(amount)) %>% 
-#   dplyr::pull(total_donations_amount)
-
-
-###3
-
-#### need to troubleshoot
-
-
-
-# 
-# # # Add a random delay between 1 to 15 seconds
-# random_delay <- runif(1, 10, 20)
-# Sys.sleep(random_delay)
-# 
-# 
-# link <- as.character(url)
-# 
-# test_tib[i, "link"] = link
-# 
-# 
-# # mr_td =  read_html_func %>%
-# #   html_elements(css = ".hrt-text-body-lg") %>%
-# #   html_text()
-# # 
-# # test_tib[i, "money_raised"] = mr_td[1]
-# # 
-# # test_tib[i, "total_num_donations"] = stringr::str_sub(mr_td[2], start = 2L, end = -2L)
-# # 
-# # total_goal = read_html_func %>%
-# #   html_elements(css = ".hrt-text-body-sm") %>%
-# #   html_text()
-# # 
-# # test_tib[i, "is_canadian"] = stringr::str_detect(total_goal[1], "CAD")
-# # 
-# # test_tib[i, "total_goal_amount"] = readr::parse_number(total_goal[1])
-# 
-# 
-# mr_td =  read_html_func %>%
-#   html_elements(css = ".hrt-disp-inline") %>%
-#   html_text()
-# # 
-# # # changed and good
-# # test_tib[i, "total_num_donations"] = stringr::str_sub(mr_td[1], start = 2L, end = -2L)
-# # 
-# total_goal = read_html_func %>%
-#   html_elements(css = ".hrt-text-body-sm") %>%
-#   html_text()
-# # 
-# # # changed and good
-# # test_tib[i, "money_raised"] = stringr::str_extract(total_goal[1], "^[^ ]+")
-# # 
-# # # didnt change and good
-# # test_tib[i, "is_canadian"] = stringr::str_detect(total_goal[1], "CAD")
-# # 
-# # # changed and good
-# # # test_tib[i, "total_goal_amount"] = readr::parse_number(str_extract(total_goal[1], "(?<=raised of )\\$[\\d,]+|(?<=raised of )\\€[\\d,]+|(?<=raised of )\\£[\\d,]+|(?<=raised of )\\kr[\\d,]+"))  
-# # 
-# # test_tib[i, "total_goal_amount"] = readr::parse_number(str_extract(total_goal[1], "(?<=raised of ).*?(?= goal)"))  
-
-
-# parse_number(str_extract_all(total_goal[1], "\\d{1,3}(?:,\\d{3})*")[[1]][2])
