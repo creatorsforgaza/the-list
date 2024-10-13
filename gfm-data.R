@@ -63,8 +63,9 @@ end_word <- 'suggested_donation_stats'
 
 ### for the total goal amount and currencycode
 # "currencyCode\":\"USD\",\"amount\":50000},\"goalDeadline\":null,
-start_word_total_goal = 'isGfmDotOrgFund'
-end_word_total_goal = 'goalDeadline'
+start_word_total_goal = 'userDefinedGoalAmount'
+end_word_total_goal = 'visibleInSearch'
+
 
 ### for the current money raised
 start_word_current_amount = 'currentAmount'
