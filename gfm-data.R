@@ -79,7 +79,7 @@ polite_scraping <- politely(rvest::read_html)
 
 
 #### trying out polite ----
-for(i in 1:5){
+for(i in 1:num_funds){
 
     url = paste0("https://www.gofundme.com/f/",
                  all_gfm_links[i,1])
