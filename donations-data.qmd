@@ -132,7 +132,7 @@ sheet_gaza_data <- read_sheet(ss1,
 
 
 daily_numbers <- sheet_gaza_data %>% 
-  dplyr::filter(date > today() - days(3)) %>% 
+  dplyr::filter(date > today() - days(10)) %>% 
   dplyr::arrange(desc(date)) %>% 
   dplyr::group_by(link) %>% 
   dplyr::mutate(row_n = row_number()) %>% 
