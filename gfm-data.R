@@ -7,8 +7,8 @@ library(gt)
 library(gtExtras)
 library(polite)
 
-# drive_auth(path = ".secrets/client_secret.json")
-# gs4_auth(path = ".secrets/client_secret.json")
+drive_auth(path = ".secrets/client_secret.json")
+gs4_auth(path = ".secrets/client_secret.json")
 
 
 drive_auth(path = Sys.getenv("GOOGLE_AUTHENTICATION_CREDENTIALS"))
@@ -79,7 +79,7 @@ polite_scraping <- politely(rvest::read_html)
 
 
 #### trying out polite ----
-for(i in 1:num_funds){
+for(i in 1:5){
 
     url = paste0("https://www.gofundme.com/f/",
                  all_gfm_links[i,1])
@@ -166,15 +166,15 @@ for(i in 1:num_funds){
                                          "(.*?)",
                                          end_word_total_goal))) %>%
     dplyr::select(result) %>%
-    unlist() %>%
-    enframe() %>%
-    dplyr::mutate(result =
-                    str_match_all(value,
-                                  paste0("(?s)",
-                                         'currencyCode',
-                                         "(.*?)",
-                                         end_word_total_goal))) %>%  
-    dplyr::select(result) %>%
+    # unlist() %>%
+    # enframe() %>%
+    # dplyr::mutate(result =
+    #                 str_match_all(value,
+    #                               paste0("(?s)",
+    #                                      'currencyCode',
+    #                                      "(.*?)",
+    #                                      end_word_total_goal))) %>%  
+    # dplyr::select(result) %>%
     unlist() %>%
     enframe()  %>% 
     dplyr::mutate(total_goal_amount = as.numeric(str_extract_all(value, "[0-9]+"))) %>% 
@@ -235,3 +235,31 @@ for(i in 1:num_funds){
 #   head(n = 1) %>%
 #   dplyr::pull(total_goal_amount)
 
+
+# test_tib[i, "total_goal_amount"] = 
+#   
+# read_html_func %>%
+#   html_text() %>%
+#   enframe() %>%
+#   dplyr::mutate(result =
+#                   str_match_all(value,
+#                                 paste0("(?s)",
+#                                        start_word_total_goal,
+#                                        "(.*?)",
+#                                        end_word_total_goal))) %>%
+#   dplyr::select(result) %>%
+#   # unlist() %>%
+#   # enframe() %>%
+#   # dplyr::mutate(result =
+#   #                 str_match_all(value,
+#   #                               paste0("(?s)",
+#   #                                      'currencyCode',
+#   #                                      "(.*?)",
+#   #                                      end_word_total_goal))) %>%  
+#   # dplyr::select(result) %>%
+#   unlist() %>%
+#   enframe()  %>% 
+#   dplyr::mutate(total_goal_amount = as.numeric(str_extract_all(value, "[0-9]+"))) %>% 
+#   dplyr::select(total_goal_amount) %>% 
+#   head(n = 1) %>% 
+#   dplyr::pull(total_goal_amount)
