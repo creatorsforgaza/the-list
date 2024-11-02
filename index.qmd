@@ -38,7 +38,7 @@ format:
 
 ::: {.card expandable="false"}
 ::: {style="background-color: #01e2b4; text-align: center; display: flex; align-items: center; justify-content: center; height: 100%;"}
-[[CREATOR/AMPLIFIER SIGN-UP: Get a family assignment](https://creatorsforgaza.github.io/the-list/volunteer.html)]{style="font-size: clamp(1.5rem, 3.5vw, 2.4rem); width: 100%; height: 200px"}
+[[CREATOR SIGN-UP: Get a family assignment](https://creatorsforgaza.github.io/the-list/volunteer.html)]{style="font-size: clamp(1.5rem, 3.5vw, 2.4rem); width: 100%; height: 200px"}
 :::
 :::
 
