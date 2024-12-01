@@ -333,7 +333,7 @@ num_funds_nok_24 <- final_table %>%
 
 #### *CLICK THRU* to donate or share
 
-Table below updated on `r format(lubridate::now("UTC") - hours(7), "%B %d, %Y")` at `r paste0(format(lubridate::now("UTC") - hours(7), "%I:%M %p"), " PST") `
+Table below updated on `r format(lubridate::now("UTC") - hours(8), "%B %d, %Y")` at `r paste0(format(lubridate::now("UTC") - hours(8), "%I:%M %p"), " PST") `
 
 
 
