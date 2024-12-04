@@ -1,5 +1,5 @@
 ---
-title: "OUR PALESTINIAN FAMILIES’ GoFundMes"
+title: "OUR PALESTINIAN FAMILIES’ FUNDRAISERS"
 execute:
   message: false
   error: false
@@ -340,30 +340,33 @@ Table below updated on `r format(lubridate::now("UTC") - hours(8), "%B %d, %Y")`
 ```{r final table}
 #| column: screen
 
+chuffed_links <- tibble(
+  link = "https://chuffed.org/project/artistmohammedalassar",
+  link_text = "Mohammed and his wife",
+  total_num_donations = NA,
+  currency_abv = "USD",
+  amount_raised_num = NA,
+  percent_of_goal = 0.1667,
+  daily_change = NA
+)
+
 link_text <- final_table %>%
-  dplyr::pull(link_text)
+  dplyr::bind_rows(chuffed_links) %>% 
+  dplyr::pull(link_text) 
 
 # format(lubridate::now(), "%B %d, %Y")
 # format(lubridate::now(), "%I:%M %p %Z")
 
 
 final_table %>% 
+  dplyr::bind_rows(
+    chuffed_links
+  ) %>% 
   dplyr::select(-c(link_text)) %>% 
   # dplyr::relocate(uuid, .before = link) %>% 
   gt(
     # rowname_col = "row_n"
     ) %>%
-  # gt::tab_header(
-  #   title = "Creators for Gaza Gofundme Campaign Totals",
-  #   subtitle = paste0("Updated ", lubridate::now())
-  # ) %>% 
-  # gt::fmt_image(
-  #   columns = uuid,
-  #   path = paste0(here::here(), "/qr-codes"),
-  #   file_pattern = "{x}.png",
-  #   width = "8em",
-  #   height = "8em"
-  # ) %>% 
   gt::fmt_url(
     columns = link, 
     label = link_text,
@@ -383,6 +386,11 @@ final_table %>%
     total_num_donations ~ px(80),
     daily_change ~ px(80)
   ) %>% 
+  gt::sub_missing(
+    columns = everything(),
+    rows = everything(),
+    missing_text = ""
+  ) %>% 
   gt::fmt_currency(
     columns = c(amount_raised_num, daily_change),
     currency = from_column(column = "currency_abv"),
@@ -393,7 +401,7 @@ final_table %>%
   gtExtras::gt_plt_bar_pct(
     column = percent_of_goal,
     labels = TRUE,
-    scaled = TRUE,    
+    scaled = TRUE,
     fill = "#01e2b4",
     height = 26,
     width = 132,
@@ -401,7 +409,7 @@ final_table %>%
     font_size = "13px",
     decimals = 0,
     label_cutoff = 0
-  ) %>%   
+  ) %>%
   gt::cols_hide(
     c(currency_abv)
   ) %>%
@@ -448,7 +456,7 @@ final_table %>%
     # total_num_donations_24_hours = paste0("Number of donations on ", format(lubridate::now("UTC") - lubridate::days(1), "%B %d")),
     daily_change = paste0("Amount raised on ", format(lubridate::now("UTC") - lubridate::days(1), "%B %d")),
     # uuid = "QR Code",
-    link = "Link to GoFundMe"
+    link = "Link to Fundraiser"
     # total_num_donations_last_20 = "Number of donations",
     # money_raised_last_20 = "Amount raised",
     # num_days_last_20 = "# of days between last 20 donations"

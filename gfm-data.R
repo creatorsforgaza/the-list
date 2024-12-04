@@ -30,9 +30,9 @@ all_gfm_links <- sheet_gaza %>%
   dplyr::mutate(fund_parameter = str_squish(fund_parameter)) %>% 
   dplyr::select(fund_parameter)
 
+
+
 #### testing grabbing data from sheet ----
-
-
 
 ###### test tib -----
 test_tib <- tibble(
@@ -185,6 +185,23 @@ for(i in 1:num_funds){
 
   
 }
+
+
+
+# 
+# read_html_func_chuff_not_friendly <- rvest::read_html("https://chuffed.org/project/artistmohammedalassar")
+# 
+# read_html_func_chuff_not_friendly %>% 
+#   html_text()
+#   
+# 
+# read_html_func_chuff <- polite_scraping("https://chuffed.org/project/artistmohammedalassar")
+# 
+# read_html_func_chuff %>% 
+#   # html_elements(css = ".progress-meter__value-raised") %>%
+#   html_text() %>% 
+#   enframe() %>%  
+#   dplyr::mutate(total_goal_amount = str_extract_all(value, "\\$"))
 
 # troubleshoot why total_goal amount isnt working
 # 
