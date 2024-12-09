@@ -46,7 +46,7 @@ format:
 
 ::: {.card expandable="false"}
 ::: {style="background-color: #01e2b4; color: black; text-align: center; display: flex; align-items: center; justify-content: center; height: 100%;"}
-[[OUR GAZAN FAMILIES: Donate or share the list](https://docs.google.com/document/d/1c0K0nP6VQ2PrCM_2ggLFdfHIH0y4j4t4X4I9dxx7VyU/mobilebasic)]{style="font-size: clamp(1.5rem, 3.5vw, 2.4rem); width: 100%; height: 100%"}
+[[OUR GAZAN FAMILIES: Donate or share the list](https://creatorsforgaza.github.io/the-list/donations-data.html#click-thru-to-donate-or-share)]{style="font-size: clamp(1.5rem, 3.5vw, 2.4rem); width: 100%; height: 100%"}
 :::
 :::
 

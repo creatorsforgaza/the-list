@@ -142,7 +142,7 @@ daily_numbers <- sheet_gaza_data %>%
   dplyr::arrange(link, date) %>% 
   dplyr::mutate(lagged_val = lag(amount_raised_num)) %>% 
   dplyr::mutate(daily_change = amount_raised_num - lagged_val) %>% 
-  dplyr::mutate(filt_this = rep(c(FALSE, TRUE), 44)) %>% 
+  dplyr::mutate(filt_this = rep(c(FALSE, TRUE), 45)) %>% 
   dplyr::filter(filt_this == TRUE) %>% 
   dplyr::select(link, daily_change)
 
