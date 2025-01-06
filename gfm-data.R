@@ -31,7 +31,6 @@ all_gfm_links <- sheet_gaza %>%
   dplyr::select(fund_parameter)
 
 
-
 #### testing grabbing data from sheet ----
 
 ###### test tib -----
