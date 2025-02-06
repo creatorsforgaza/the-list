@@ -7,14 +7,6 @@ format:
     link-external-newwindow: true
 ---
 
-<style>
-
-p {
-  text-align: center;
-}
-
-</style>
-
 
 <br>
 
@@ -26,16 +18,36 @@ p {
 
 <br>
 
-**A creator is someone who creates social media content or/ and in-person events to fundraise for one of our families in Gaza.** A creator is someone who is excited to make stuff or to post online, and connected to us and to family on social media. By signing up to become a creator with us, you will be committing to taking on one of our family campaigns and committing to consistently amplifying their campaign.
+#### Sign up as a Creator!
+
+**A creator is someone who creates social media content or/ and in-person events to fundraise for one of our families in Gaza.** By signing up to become a creator with us, you will be taking on one of our family campaigns and committing to consistently amplifying their campaign. You will be paired up with a family’s campaign, and put in touch with the contact for that campaign. Create whatever type of post or experience for whatever platform you like - illustration, image carousel, reel, tiktok, raffle, service offering, fundraising event, the list is endless. The aim is to bring attention to the campaign with something in a shareable way that highlights that our Palestinian families in Gaza are not numbers. You can help our families feel seen and amplify their stories. We are seeking creators who can commit for the long haul, until our families’ needs are met.
+
+#### Can’t commit to being a creator?
+
+Become an autonomous amplifier! Help support Creators and families on your own by printing and disseminating resources that have already been created.
+
+-   Check out our [Instagram](https://www.instagram.com/creatorsforgaza/ "https://www.instagram.com/creatorsforgaza/"), and share our posts with your networks. Please include the direct links to the fundraisers. Tag us in your stories about our families!
+
+-   Print out and [disseminate materials](https://drive.google.com/drive/folders/1DP0FoIJ5HYkfXWEFCutYxwSzBlqf1tGA "Resources folder") in your community. Take them to little free libraries, community bulletin boards, put inside birthday or greeting cards to friends and family, post them on telephone poles, ask local businesses if you can put one in their window.
+
+-   Team up with some friends to organize a fundraising event, bake sale, garage sale, craft sale, whatever! Host a movie screening, and ask for donations! The possibilities are endless.
+
+-   Text and / or email your friends and family about one of our family’s campaigns. This is a highly important and possibly the least utilized way of getting donations. People generally tend to support things that they know are personally meaningful to you.
+
+-   Spread the word about Creators for Gaza! Encourage people to join us also! Encourage folks to share the posts about our families.
 
 <!-- <br> -->
 
 <!-- <br> -->
 
 <!-- ::: {.card expandable="false"} -->
+
 <!-- ::: {style="background-color: #01e2b4; color: black; text-align: center; display: flex; align-items: center; justify-content: center; height: 100%;"} -->
+
 <!-- [[AMPLIFIER SIGN-UP](https://docs.google.com/forms/d/e/1FAIpQLSfwvxWeJ7V1FhzguYOP9lAkZ_SB8LogzT5e5pi_izvhm3mGQQ/viewform)]{style="font-size: clamp(1.5rem, 3.5vw, 2.4rem); width: 100%; height: 500px"} -->
+
 <!-- ::: -->
+
 <!-- ::: -->
 
 <!-- *I want to share already created work* -->
