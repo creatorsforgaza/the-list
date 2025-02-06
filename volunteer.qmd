@@ -7,6 +7,15 @@ format:
     link-external-newwindow: true
 ---
 
+<style>
+
+p {
+  text-align: center;
+}
+
+</style>
+
+
 <br>
 
 ::: {.card expandable="false"}
@@ -15,7 +24,9 @@ format:
 :::
 :::
 
-*I want to create art for, and share, a family’s campaign*
+<br>
+
+**A creator is someone who creates social media content or/ and in-person events to fundraise for one of our families in Gaza.** A creator is someone who is excited to make stuff or to post online, and connected to us and to family on social media. By signing up to become a creator with us, you will be committing to taking on one of our family campaigns and committing to consistently amplifying their campaign.
 
 <!-- <br> -->
 
@@ -31,4 +42,4 @@ format:
 
 <br>
 
-[![](images/screenshots3.jpg){fig-align="center"}](https://www.instagram.com/creatorsforgaza/)
+[![](images/ig-4.png){fig-align="center"}](https://www.instagram.com/creatorsforgaza/)

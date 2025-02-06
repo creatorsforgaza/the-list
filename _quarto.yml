@@ -17,6 +17,8 @@ website:
         text: Volunteer
       - href: donations-data.qmd
         text: Our Families
+      - href: faqs.qmd
+        text: FAQs 
       # - href: fundraisers.qmd
       #   text: Fundraisers
       - href: resources.qmd

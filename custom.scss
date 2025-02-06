@@ -1,12 +1,11 @@
 $theme-spotify-green: #01e2b4;
 $theme-black: #000000;
-$theme-dark-purple: #7D3C98;
-$theme-light-purple: #e3cbf2;
 $theme-darkest-gray: #f4f4f4;
 $theme-medium-gray: #01e2b4 ;
 $theme-light-gray: #f4f4f4;
 $theme-text-color: #000000;
-$theme-headers-color: #fe1a2f;
+$theme-text-new: #fe1a2f;
+$theme-headers-color: #000000;
 $valuebox-bg-primary: #01e2b4;
 
 /* green = #01e2b4 */
@@ -16,11 +15,11 @@ $valuebox-bg-primary: #01e2b4;
 @import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
 
 $font-family-sans-serif: 'Mulish', sans-serif;
-$font-size-root: 12px;
+$font-size-root: 14px;
 $body-color: $theme-text-color;
 $link-color: $theme-text-color;
 
-
+/*#fe1a2f; */
 
 
 /* Display options for tables */
@@ -50,6 +49,13 @@ body {
 .navbar-title {
   font-weight: bold;
   height: 100px;
+}
+
+/* Bold navbar title */
+.title {
+  /*font-weight: bold;*/
+  font-size: 40px;
+  text-align: center;
 }
 
 .navbar-icon {
@@ -125,11 +131,23 @@ a {
   color: $link-color;
 }
 
-
+/* Make all headings and paragraph text red */ 
+h3{
+  color: $theme-text-new;
+}
 
 /* Make all headings and paragraph text red */ 
-h1, h2, h3, h4, h5, h6, p{
-  color: $theme-headers-color;
+p{
+  color: $theme-text-new;
+}
+
+/* Make all headings and paragraph text red */ 
+h1{
+  color: $theme-text-new;
+}
+
+h2{
+   text-align: center;
 }
 
 /* Colour of "AUTHOR" text */ 

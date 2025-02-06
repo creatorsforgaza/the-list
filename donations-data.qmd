@@ -11,8 +11,11 @@ format:
     # link-external-icon: true
     link-external-newwindow: true
 ---
+<br>
 
+### Which family/campaign should I donate to?
 
+Any! We are connected to each of these families, and every one is in dire need of help. Each of these families is someone we know personally, or is connected to our people.
 
 ```{r}
 
@@ -30,6 +33,7 @@ library(gtExtras)
 
 
 ```{r}
+##| eval: false
 ##| cache: true
 # 
 source("gfm-data.R")
@@ -40,6 +44,7 @@ source("gfm-data.R")
 
 
 ```{r cleaning df}
+##| eval: false
 #| echo: false
 #| include: false
 
@@ -81,6 +86,7 @@ x <- test_tib %>%
 
 
 ```{r removing daily numbers from table}
+##| eval: false
 #| echo: false
 #| include: false
 
@@ -109,6 +115,7 @@ final_table1 <-  x %>%
 
 
 ```{r}
+##| eval: false
 
 data_write_back <- final_table1 %>% 
   dplyr::mutate(link = str_sub(link, start = 28L)) %>% 
@@ -126,6 +133,7 @@ googlesheets4::sheet_append(
 
 
 ```{r adding daily numbers}
+##| eval: false
 
 sheet_gaza_data <- read_sheet(ss1,
                               sheet = "data")
@@ -156,6 +164,7 @@ final_table <- final_table1 %>%
 
 
 ```{r sum of currencies}
+##| eval: false
 sum_all_donations_in_usd <- final_table %>%
   dplyr::filter(currency_abv == "USD") %>% 
   summarise(sum(amount_raised_num)) %>%
@@ -326,19 +335,19 @@ num_funds_nok_24 <- final_table %>%
 # 
 # }
 
+# Table below updated on `r format(lubridate::now("UTC") - hours(8), "%B %d, %Y")` at `r paste0(format(lubridate::now("UTC") - hours(8), "%I:%M %p"), " PST") `
 
 ```
-
-<br>
 
 
 #### *CLICK THRU* to donate or share
 
-Table below updated on `r format(lubridate::now("UTC") - hours(8), "%B %d, %Y")` at `r paste0(format(lubridate::now("UTC") - hours(8), "%I:%M %p"), " PST") `
+
 
 
 
 ```{r final table}
+##| eval: false
 #| column: screen
 
 chuffed_links <- tibble(
@@ -524,6 +533,7 @@ final_table %>%
 #### Total amount raised from all the current fundraising campaigns
 
 ```{r totals}
+##| eval: false
 #| column: screen
 #| color: primary
 #| theme: primary
@@ -577,9 +587,10 @@ layout_column_wrap(
 ```
 
 
-#### Amount raised on `r format(lubridate::now("UTC") - lubridate::days(1), "%B %d, %Y")`
+<!-- #### Amount raised on `r format(lubridate::now("UTC") - lubridate::days(1), "%B %d, %Y")` -->
 
 ```{r totals 24}
+##| eval: false
 #| column: screen
 #| color: primary
 #| theme: primary

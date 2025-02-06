@@ -6,11 +6,20 @@ format:
     link-external-newwindow: true
 ---
 
-<br>
+
+<style>
+
+p {
+  text-align: center;
+}
+
+</style>
 
 <br>
 
-[![](images/printable-list.png){fig-align="left" width="657"}](https://docs.google.com/document/d/1c0K0nP6VQ2PrCM_2ggLFdfHIH0y4j4t4X4I9dxx7VyU/mobilebasic)
+<br>
+
+[![](images/printable-list.png){fig-align="center" width="657"}](https://docs.google.com/document/d/1c0K0nP6VQ2PrCM_2ggLFdfHIH0y4j4t4X4I9dxx7VyU/mobilebasic)
 
 [**TAKE IMMEDIATE ACTION FOR PALESTINIANS EVACUATING GAZA**](https://docs.google.com/document/d/1c0K0nP6VQ2PrCM_2ggLFdfHIH0y4j4t4X4I9dxx7VyU/mobilebasic "TOOLTIP")
 
@@ -18,7 +27,7 @@ format:
 
 <br>
 
-[![](images/half-page-flyer.png){fig-align="left"}](https://www.dropbox.com/scl/fo/eq2dgyrmlk2gqa7gig9pu/AJ4XRxUMgunVOe8OejTOD_4?rlkey=kgrgsv337ktabq5j86t48jiwd&e=1&dl=0)
+[![](images/half-page-flyer.png){fig-align="center"}](https://www.dropbox.com/scl/fo/eq2dgyrmlk2gqa7gig9pu/AJ4XRxUMgunVOe8OejTOD_4?rlkey=kgrgsv337ktabq5j86t48jiwd&e=1&dl=0)
 
 [**Support a Family Flyer - half page**](https://www.dropbox.com/scl/fo/eq2dgyrmlk2gqa7gig9pu/AJ4XRxUMgunVOe8OejTOD_4?rlkey=kgrgsv337ktabq5j86t48jiwd&e=1&dl=0)
 
@@ -26,7 +35,7 @@ format:
 
 <br>
 
-[![](images/nebrasmedicaltent.png){fig-align="left" width="397"}](https://givebutter.com/nebras)
+[![](images/nebrasmedicaltent.png){fig-align="center" width="397"}](https://givebutter.com/nebras)
 
 [**Support Nebras Medical Tent**](https://givebutter.com/nebras)
 
@@ -34,7 +43,7 @@ format:
 
 <br>
 
-[![](images/connect-palestine-scholarship.png){fig-align="left" width="651"}](https://docs.google.com/spreadsheets/d/19s5Ou-MNZYhRTwzdr707RRzhfO0QpAwYo2kOvTuqOzU/edit?gid=1314855824#gid=1314855824)
+[![](images/connect-palestine-scholarship.png){fig-align="center" width="651"}](https://docs.google.com/spreadsheets/d/19s5Ou-MNZYhRTwzdr707RRzhfO0QpAwYo2kOvTuqOzU/edit?gid=1314855824#gid=1314855824)
 
 [**Connect Palestine \| Scholarship Database**](https://docs.google.com/spreadsheets/d/19s5Ou-MNZYhRTwzdr707RRzhfO0QpAwYo2kOvTuqOzU/edit?gid=1314855824#gid=1314855824)
 
@@ -42,15 +51,15 @@ format:
 
 <br>
 
-[![](images/students-g-scholarship.png){fig-align="left" width="561"}](https://docs.google.com/forms/d/e/1FAIpQLSdvH0N4Z01oyPXlFTy3zpluxvWj-i5sGTxi2fX_0kHwOR82bQ/viewform)
+[![](images/students-g-scholarship.png){fig-align="center" width="561"}](https://secure.lglforms.com/form_engine/s/g_DgjZr8NO-ar4ZbK8qO7Q)
 
-[**Help Students in Gaza Apply for Scholarships**](https://docs.google.com/forms/d/e/1FAIpQLSdvH0N4Z01oyPXlFTy3zpluxvWj-i5sGTxi2fX_0kHwOR82bQ/viewform)
-
-<br>
+[**Help Students in Gaza Apply for Scholarships**](https://secure.lglforms.com/form_engine/s/g_DgjZr8NO-ar4ZbK8qO7Q)
 
 <br>
 
-[![](images/gaza-funds.png){fig-align="left" width="506"}](https://gazafunds.com/)
+<br>
+
+[![](images/gaza-funds.png){fig-align="center" width="506"}](https://gazafunds.com/)
 
 [**Gaza Funds**](https://gazafunds.com/)
 
@@ -58,7 +67,7 @@ format:
 
 <br>
 
-[![](images/resources-From-The-River_Web.jpg){fig-align="left" width="226"}](https://rimoskyo.com/shop/p/from-the-river-to-the-sea)
+[![](images/resources-From-The-River_Web.jpg){fig-align="center" width="226"}](https://rimoskyo.com/shop/p/from-the-river-to-the-sea)
 
 [**FROM THE RIVER TO THE SEA : Demystifying the Rallying Cry for Land Back and Liberation**](https://rimoskyo.com/shop/p/from-the-river-to-the-sea)
 
@@ -66,7 +75,7 @@ format:
 
 <br>
 
-[![](images/resources-FLOOD_For-Web.jpg){fig-align="left" width="472"}](https://www.sheyamghieth.com/product/flood-print-propaganda-in-practice-free-zine-download/)
+[![](images/resources-FLOOD_For-Web.jpg){fig-align="center" width="472"}](https://www.sheyamghieth.com/product/flood-print-propaganda-in-practice-free-zine-download/)
 
 [**FLOOD: Print Propaganda in Practice**](https://www.sheyamghieth.com/product/flood-print-propaganda-in-practice-free-zine-download/)
 
@@ -74,12 +83,12 @@ format:
 
 <br>
 
-[![](images/resources-MASK-UP_Web.jpg){fig-align="left" width="597"}](https://www.sheyamghieth.com/product/mask-up-we-need-you-palestinian-solidarity-covid-19-and-the-struggle-for-liberation/)
+[![](images/resources-MASK-UP_Web.jpg){fig-align="center" width="597"}](https://www.sheyamghieth.com/product/mask-up-we-need-you-palestinian-solidarity-covid-19-and-the-struggle-for-liberation/)
 
 [**MASK UP, WE NEED YOU: Palestinian Solidarity, Covid-19, and the Struggle for Liberation**](https://www.sheyamghieth.com/product/mask-up-we-need-you-palestinian-solidarity-covid-19-and-the-struggle-for-liberation/)
 
 <br> <br> <br>
 
-[![](images/screenshots5.jpg){fig-align="left"}](https://www.instagram.com/creatorsforgaza)
+[![](images/ig-5.png){fig-align="center"}](https://www.instagram.com/creatorsforgaza)
 
 [**Instagram Page to Artwork**](https://www.instagram.com/creatorsforgaza)
