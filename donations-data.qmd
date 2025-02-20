@@ -345,36 +345,37 @@ num_funds_nok_24 <- final_table %>%
 Table below updated on `r format(lubridate::now("UTC") - hours(8), "%B %d, %Y")` at `r paste0(format(lubridate::now("UTC") - hours(8), "%I:%M %p"), " PST") `
 
 
-
 ```{r final table}
 ##| eval: false
 #| column: screen
 
 chuffed_links <- tibble(
   link = c("https://chuffed.org/project/artistmohammedalassar",
-           "https://chuffed.org/project/122413-a-new-chapter-in-our-journey-help-mahmoud-continue-his-education-amidst-the-crisis-in-gaza"),
+           "https://chuffed.org/project/122413-a-new-chapter-in-our-journey-help-mahmoud-continue-his-education-amidst-the-crisis-in-gaza",
+           "https://chuffed.org/project/helpmalak"),
   link_text = c("Mohammed and his wife",
-                "Help Mahmoud evacuate Gaza"),
-  total_num_donations = c(NA, NA),
-  currency_abv = c("USD", "USD"),
-  amount_raised_num = c(NA, NA),
-  percent_of_goal = c(1.72, 0.4),
-  daily_change = c(NA, NA)
+                "Help Mahmoud evacuate Gaza",
+                "Help Malak and her family escape"),
+  total_num_donations = c(NA, NA, NA),
+  currency_abv = c("USD", "USD", "USD"),
+  amount_raised_num = c(NA, NA, NA),
+  percent_of_goal = c(1.72, 2.4, 0.2),
+  daily_change = c(NA, NA, NA)
 )
 
-paypal_links <- tibble(
-  link = "https://www.paypal.com/paypalme/belaljasem",
-  link_text = "Help Malak and her family escape",
-  total_num_donations = NA,
-  currency_abv = "USD",
-  amount_raised_num = NA,
-  percent_of_goal = 0,
-  daily_change = NA
-)
+# paypal_links <- tibble(
+#   link = "https://www.paypal.com/paypalme/belaljasem",
+#   link_text = "Help Malak and her family escape",
+#   total_num_donations = NA,
+#   currency_abv = "USD",
+#   amount_raised_num = NA,
+#   percent_of_goal = 0,
+#   daily_change = NA
+# )
 
 link_text <- final_table %>%
   dplyr::bind_rows(chuffed_links) %>% 
-  dplyr::bind_rows(paypal_links) %>%   
+  # dplyr::bind_rows(paypal_links) %>%   
   dplyr::pull(link_text) 
 
 # format(lubridate::now(), "%B %d, %Y")
@@ -385,9 +386,9 @@ final_table %>%
   dplyr::bind_rows(
     chuffed_links
   ) %>% 
-  dplyr::bind_rows(
-    paypal_links
-  ) %>%   
+  # dplyr::bind_rows(
+  #   paypal_links
+  # ) %>%   
   dplyr::select(-c(link_text)) %>% 
   # dplyr::relocate(uuid, .before = link) %>% 
   gt(
