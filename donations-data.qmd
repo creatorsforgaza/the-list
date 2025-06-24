@@ -353,16 +353,18 @@ chuffed_links <- tibble(
   link = c("https://chuffed.org/project/artistmohammedalassar",
            "https://chuffed.org/project/122413-a-new-chapter-in-our-journey-help-mahmoud-continue-his-education-amidst-the-crisis-in-gaza",
            "https://chuffed.org/project/helpmalak",
-           "https://chuffed.org/project/rahmasfamily"),
+           "https://chuffed.org/project/rahmasfamily",
+           "https://chuffed.org/project/135758-stand-with-saeed-and-his-family"),
   link_text = c("Mohammed and his wife",
                 "Help Mahmoud evacuate Gaza",
                 "Help Malak and her family escape",
-                "Rahma and Family"),
-  total_num_donations = c(NA, NA, NA, NA),
-  currency_abv = c("USD", "USD", "USD", "USD"),
-  amount_raised_num = c(NA, NA, NA, NA),
-  percent_of_goal = c(1.93, 2.9, 7.6, 31),
-  daily_change = c(NA, NA, NA, NA)
+                "Rahma and Family",
+                "Saeed + Aya + their children"),
+  total_num_donations = c(NA, NA, NA, NA, NA),
+  currency_abv = c("USD", "USD", "USD", "USD", "USD"),
+  amount_raised_num = c(NA, NA, NA, NA, NA),
+  percent_of_goal = c(6.67, 29.86, 57.36, 47.28, 1),
+  daily_change = c(NA, NA, NA, NA, NA)
 )
 
 # paypal_links <- tibble(
