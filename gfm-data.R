@@ -73,7 +73,9 @@ end_word_total_goal = 'visibleInSearch'
 # end_word_current_amount = 'numberOfDonationsUnattributed'
 
 # this should work
-start_word_current_amount = 'currentAmount'
+# start_word_current_amount = 'currentAmount'
+# updated on 7/7/25
+start_word_current_amount = 'tAmount\\\":\\{\\\"__typename'
 end_word_current_amount = 'defaultSlug'
 
 
@@ -192,3 +194,8 @@ for(i in 1:num_funds){
 }
 
 ##### testing -----
+
+
+
+
+
