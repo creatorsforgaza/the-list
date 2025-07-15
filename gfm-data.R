@@ -74,7 +74,7 @@ end_word_total_goal = 'visibleInSearch'
 
 # this should work
 # start_word_current_amount = 'currentAmount'
-# updated on 7/7/25
+# updated 7/7/25
 start_word_current_amount = 'tAmount\\\":\\{\\\"__typename'
 end_word_current_amount = 'defaultSlug'
 
@@ -110,7 +110,8 @@ for(i in 1:num_funds){
     html_text()
   
   # changed and good
-  test_tib[i, "total_num_donations"] = stringr::str_sub(mr_td[1], start = 2L, end = -2L)
+  test_tib[i, "total_num_donations"] = ifelse(length(mr_td) == 1, stringr::str_sub(mr_td[1], start = 2L, end = -2L), 
+                                              stringr::str_sub(mr_td[2], start = 2L, end = -2L))
   
   # total_goal = read_html_func %>%
   #   html_elements(css = ".hrt-text-body-sm") %>%
@@ -194,8 +195,5 @@ for(i in 1:num_funds){
 }
 
 ##### testing -----
-
-
-
 
 
