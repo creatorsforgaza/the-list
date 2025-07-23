@@ -155,6 +155,72 @@ daily_numbers <- sheet_gaza_data %>%
   dplyr::filter(filt_this == TRUE) %>% 
   dplyr::select(link, daily_change)
 
+weekly_numbers <- sheet_gaza_data %>% 
+  dplyr::filter(date > today() - days(7)) %>% 
+  dplyr::group_by(link) %>% 
+  dplyr::summarise(
+    weekly_total = 
+      max(amount_raised_num) - min(amount_raised_num)
+  ) %>%  
+  dplyr::ungroup()
+
+biweekly_numbers <- sheet_gaza_data %>% 
+  dplyr::filter(date > today() - days(14)) %>% 
+  dplyr::group_by(link) %>% 
+  dplyr::summarise(
+    biweekly_total = 
+      max(amount_raised_num) - min(amount_raised_num)
+  ) %>%  
+  dplyr::ungroup()
+
+monthly_numbers <- sheet_gaza_data %>% 
+  dplyr::filter(date > today() - days(31)) %>% 
+  dplyr::group_by(link) %>% 
+  dplyr::summarise(
+    monthly_total = 
+      max(amount_raised_num) - min(amount_raised_num)
+  ) %>%  
+  dplyr::ungroup()
+
+
+aggregate_data <- sheet_gaza %>% 
+  janitor::clean_names() %>% 
+  dplyr::filter(!person_family %in% c("Jenna/Hashem"),
+                status != "CLOSED / NOT ACCEPTING DONATIONS") %>%   
+  dplyr::filter(str_detect(links, "gofund"))  %>% 
+  dplyr::mutate(fund_parameter = str_squish(fund_parameter)) %>% 
+  dplyr::select(gfm_link:status) %>% 
+  dplyr::left_join(weekly_numbers,
+                   by = join_by(fund_parameter == link)) %>% 
+  dplyr::left_join(biweekly_numbers,
+                   by = join_by(fund_parameter == link)) %>%  
+  dplyr::left_join(monthly_numbers,
+                   by = join_by(fund_parameter == link)) %>% 
+  dplyr::arrange(desc(status), monthly_total) %>%  
+  dplyr::left_join(final_table1 %>% 
+                       dplyr::select(fund_parameter, currency_abv),
+                   join_by(fund_parameter)) %>% 
+  dplyr::select(-fund_parameter)  
+
+
+
+googlesheets4::sheet_write(
+    ss = ss1,
+    sheet = "aggregate-data",
+    data = aggregate_data
+  )
+
+# most recent row with a number for donation
+# sheet_gaza_data %>% 
+#   dplyr::filter(str_detect(total_num_donations, "[0-9]")) %>% 
+#   dplyr::group_by(link) %>% 
+#   dplyr::filter(date > today() - days(4)) %>%
+#   dplyr::arrange(desc(date)) %>% 
+#   dplyr::group_by(link) %>% 
+#   dplyr::mutate(row_n = row_number()) %>% 
+#   dplyr::ungroup() %>% 
+#   dplyr::filter(row_n %in% c(1)) %>% View()
+
 final_table <- final_table1 %>% 
   dplyr::left_join(daily_numbers,
                    join_by(fund_parameter == link)) %>% 
