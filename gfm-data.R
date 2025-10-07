@@ -41,7 +41,7 @@ test_tib <- tibble(
   money_raised = NULL,
   total_goal_amount = NULL,
   # is_canadian = NULL,
-  total_num_donations = NULL,
+  # total_num_donations = NULL,
   currency = NULL
   # total_num_donations_24_hours = NULL,
   # money_raised_24_hours = NULL
@@ -105,13 +105,13 @@ for(i in 1:num_funds){
   
 
   
-  mr_td =  read_html_func %>%
-    html_elements(css = ".hrt-disp-inline") %>%
-    html_text()
-  
-  # changed and good
-  test_tib[i, "total_num_donations"] = ifelse(length(mr_td) == 1, stringr::str_sub(mr_td[1], start = 2L, end = -2L), 
-                                              stringr::str_sub(mr_td[2], start = 2L, end = -2L))
+  # mr_td =  read_html_func %>%
+  #   html_elements(css = ".hrt-disp-inline") %>%
+  #   html_text()
+  # 
+  # # changed and good
+  # test_tib[i, "total_num_donations"] = ifelse(length(mr_td) == 1, stringr::str_sub(mr_td[1], start = 2L, end = -2L), 
+  #                                             stringr::str_sub(mr_td[2], start = 2L, end = -2L))
   
   # total_goal = read_html_func %>%
   #   html_elements(css = ".hrt-text-body-sm") %>%
