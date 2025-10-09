@@ -150,7 +150,6 @@ for(i in 1:num_funds){
     enframe() %>% 
     dplyr::mutate(currency = case_when(
       str_detect(value, "USD") ~ "USD",
-      str_detect(value, "CAD") ~ "CAD",
       str_detect(value, "GBP") ~ "GBP",
       str_detect(value, "DKK") ~ "DKK",
       str_detect(value, "EUR") ~ "EUR",

@@ -244,17 +244,17 @@ sum_all_donations_in_usd_24 <- final_table %>%
   as.numeric() %>%
   format(big.mark = ",")
 
-sum_all_donations_in_cad <- final_table %>%
-  dplyr::filter(currency_abv == "CAD") %>% 
-  summarise(sum(amount_raised_num)) %>%
-  as.numeric() %>%
-  format(big.mark = ",")
+# sum_all_donations_in_cad <- final_table %>%
+#   dplyr::filter(currency_abv == "CAD") %>% 
+#   summarise(sum(amount_raised_num)) %>%
+#   as.numeric() %>%
+#   format(big.mark = ",")
 
-sum_all_donations_in_cad_24 <- final_table %>%
-  dplyr::filter(currency_abv == "CAD") %>% 
-  summarise(sum(daily_change)) %>%
-  as.numeric() %>%
-  format(big.mark = ",")
+# sum_all_donations_in_cad_24 <- final_table %>%
+#   dplyr::filter(currency_abv == "CAD") %>% 
+#   summarise(sum(daily_change)) %>%
+#   as.numeric() %>%
+#   format(big.mark = ",")
 
 sum_all_donations_in_eur <- final_table %>%
   dplyr::filter(currency_abv == "EUR") %>% 
@@ -314,14 +314,14 @@ num_funds_usd_24 <- final_table %>%
   dplyr::filter(daily_change > 0.01) %>% 
   nrow()
 
-num_funds_cad <- final_table %>%
-  dplyr::filter(currency_abv == "CAD") %>% 
-  nrow()
-
-num_funds_cad_24 <- final_table %>%
-  dplyr::filter(currency_abv == "CAD") %>% 
-  dplyr::filter(daily_change > 0.01) %>% 
-  nrow()
+# num_funds_cad <- final_table %>%
+#   dplyr::filter(currency_abv == "CAD") %>% 
+#   nrow()
+# 
+# num_funds_cad_24 <- final_table %>%
+#   dplyr::filter(currency_abv == "CAD") %>% 
+#   dplyr::filter(daily_change > 0.01) %>% 
+#   nrow()
 
 num_funds_euro <- final_table %>%
   dplyr::filter(currency_abv == "EUR") %>% 
@@ -591,12 +591,12 @@ vbs <- list(
     value = paste0("$", sum_all_donations_in_usd),
     icon = bs_icon("bank")
   ),
-  value_box(
-    title = paste0("Total amount raised in Canadian Dollars from ", num_funds_cad, " funds:"),
-    # theme = "#01e2b4",
-    value = paste0("$", sum_all_donations_in_cad),
-    icon = bs_icon("bank")
-  ),  
+  # value_box(
+  #   title = paste0("Total amount raised in Canadian Dollars from ", num_funds_cad, " funds:"),
+  #   # theme = "#01e2b4",
+  #   value = paste0("$", sum_all_donations_in_cad),
+  #   icon = bs_icon("bank")
+  # ),  
   value_box(
     title = paste0("Total amount raised in British Pounds from ", num_funds_gbp, " funds:"),
     # theme = "primary",
@@ -651,14 +651,14 @@ vbs1 <- list(
     value = paste0("$", sum_all_donations_in_usd_24),
     icon = bs_icon("cash")
   ),  
-  value_box(
-    title = paste0("Amount raised in Canadian Dollars on ", 
-                   format(lubridate::now("UTC") - lubridate::days(1), "%B %d, %Y"),
-                   " from ", num_funds_cad_24, " funds:"),
-    # theme = "orange", # doesnt work must change this in scss file
-    value = paste0("$", sum_all_donations_in_cad_24),
-    icon = bs_icon("cash")
-  ),    
+  # value_box(
+  #   title = paste0("Amount raised in Canadian Dollars on ", 
+  #                  format(lubridate::now("UTC") - lubridate::days(1), "%B %d, %Y"),
+  #                  " from ", num_funds_cad_24, " funds:"),
+  #   # theme = "orange", # doesnt work must change this in scss file
+  #   value = paste0("$", sum_all_donations_in_cad_24),
+  #   icon = bs_icon("cash")
+  # ),    
   value_box(
     title = paste0("Amount raised in British Pounds on ", 
                    format(lubridate::now("UTC") - lubridate::days(1), "%B %d, %Y"),
