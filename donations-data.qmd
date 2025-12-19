@@ -281,17 +281,17 @@ sum_all_donations_in_gbp_24 <- final_table %>%
   as.numeric() %>%
   format(big.mark = ",")
 
-sum_all_donations_in_sek <- final_table %>%
-  dplyr::filter(currency_abv == "SEK") %>% 
-  summarise(sum(amount_raised_num)) %>%
-  as.numeric() %>%
-  format(big.mark = ",")
-
-sum_all_donations_in_sek_24 <- final_table %>%
-  dplyr::filter(currency_abv == "SEK") %>% 
-  summarise(sum(daily_change)) %>%
-  as.numeric() %>%
-  format(big.mark = ",")
+# sum_all_donations_in_sek <- final_table %>%
+#   dplyr::filter(currency_abv == "SEK") %>% 
+#   summarise(sum(amount_raised_num)) %>%
+#   as.numeric() %>%
+#   format(big.mark = ",")
+# 
+# sum_all_donations_in_sek_24 <- final_table %>%
+#   dplyr::filter(currency_abv == "SEK") %>% 
+#   summarise(sum(daily_change)) %>%
+#   as.numeric() %>%
+#   format(big.mark = ",")
 
 sum_all_donations_in_nok <- final_table %>%
   dplyr::filter(currency_abv == "NOK") %>% 
@@ -341,14 +341,14 @@ num_funds_gbp_24 <- final_table %>%
   dplyr::filter(daily_change > 0.01) %>% 
   nrow()
 
-num_funds_sek <- final_table %>%
-  dplyr::filter(currency_abv == "SEK") %>% 
-  nrow()
-
-num_funds_sek_24 <- final_table %>%
-  dplyr::filter(currency_abv == "SEK") %>% 
-  dplyr::filter(daily_change > 0.01) %>% 
-  nrow()
+# num_funds_sek <- final_table %>%
+#   dplyr::filter(currency_abv == "SEK") %>% 
+#   nrow()
+# 
+# num_funds_sek_24 <- final_table %>%
+#   dplyr::filter(currency_abv == "SEK") %>% 
+#   dplyr::filter(daily_change > 0.01) %>% 
+#   nrow()
 
 num_funds_nok <- final_table %>%
   dplyr::filter(currency_abv == "NOK") %>% 
@@ -434,7 +434,7 @@ chuffed_links <- tibble(
   # total_num_donations = c(NA, NA, NA, NA, NA, NA, NA),
   currency_abv = c("USD", "USD", "USD", "USD", "USD", "EUR", "USD"),
   amount_raised_num = c(NA, NA, NA, NA, NA, NA, NA),
-  percent_of_goal = c(12.54, 95.11, 72.02, 65.30, 70.74, 11.18, 12.50),
+  percent_of_goal = c(12.56, 100.47, 80.40, 66.30, 75.34, 11.18, 20.40),
   daily_change = c(NA, NA, NA, NA, NA, NA, NA)
 )
 
@@ -603,12 +603,12 @@ vbs <- list(
     value = paste0("£", sum_all_donations_in_gbp),
     icon = "cash"
   ),
-  value_box(
-    title = paste0("Total amount raised in Swedish krona from ", num_funds_sek, " funds:"),
-    # theme = "light",
-    value = paste0("kr", sum_all_donations_in_sek),
-    icon = "cash"
-  ),
+  # value_box(
+  #   title = paste0("Total amount raised in Swedish krona from ", num_funds_sek, " funds:"),
+  #   # theme = "light",
+  #   value = paste0("kr", sum_all_donations_in_sek),
+  #   icon = "cash"
+  # ),
   value_box(
     title = paste0("Total amount raised in Norwegian krone from ", num_funds_nok, " funds:"),
     # theme = "light",
@@ -667,14 +667,14 @@ vbs1 <- list(
     value = paste0("£", sum_all_donations_in_gbp_24),
     icon = bs_icon("cash")
   ),    
-  value_box(
-    title = paste0("Amount raised in Swedish krona on ", 
-                   format(lubridate::now("UTC") - lubridate::days(1), "%B %d, %Y"),
-                   " from ", num_funds_sek_24, " funds:"),
-    # theme = "orange", # doesnt work must change this in scss file
-    value = paste0("kr", sum_all_donations_in_sek_24),
-    icon = bs_icon("cash")
-  ),
+  # value_box(
+  #   title = paste0("Amount raised in Swedish krona on ", 
+  #                  format(lubridate::now("UTC") - lubridate::days(1), "%B %d, %Y"),
+  #                  " from ", num_funds_sek_24, " funds:"),
+  #   # theme = "orange", # doesnt work must change this in scss file
+  #   value = paste0("kr", sum_all_donations_in_sek_24),
+  #   icon = bs_icon("cash")
+  # ),
   value_box(
     title = paste0("Amount raised in Norwegian krone on ", 
                    format(lubridate::now("UTC") - lubridate::days(1), "%B %d, %Y"),
