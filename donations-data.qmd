@@ -423,20 +423,23 @@ chuffed_links <- tibble(
            "https://chuffed.org/project/rahmasfamily",
            "https://chuffed.org/project/135758-stand-with-saeed-and-his-family",
            "https://chuffed.org/project/141405-hope-for-nidaa",
-           "https://chuffed.org/project/helpmaryam"),
+           "https://chuffed.org/project/helpmaryam",
+           "https://chuffed.org/project/supporting-ibrahim-and-his-family"),
   link_text = c("Mohammed and his wife",
                 "Help Mahmoud evacuate Gaza",
                 "Help Malak and her family escape",
                 "Rahma and Family",
                 "Saeed + Aya + their children",
                 "Nedaa Oweida + family",
-                "Maryam and Family"),
+                "Maryam and Family",
+                "Help Ibrahim rebuild"),
   # total_num_donations = c(NA, NA, NA, NA, NA, NA, NA),
-  currency_abv = c("USD", "USD", "USD", "USD", "USD", "EUR", "USD"),
-  amount_raised_num = c(NA, NA, NA, NA, NA, NA, NA),
-  percent_of_goal = c(12.56, 100.47, 80.40, 66.30, 75.34, 11.18, 20.40),
-  daily_change = c(NA, NA, NA, NA, NA, NA, NA)
-)
+  currency_abv = c("USD", "USD", "USD", "USD", "USD", "EUR", "USD", "EUR"),
+  amount_raised_num = c(NA, NA, NA, NA, NA, NA, NA, NA),
+  percent_of_goal = c(12.56, 100.47, 80.40, 66.30, 75.34, 11.18, 20.40, 2.37),
+  daily_change = c(NA, NA, NA, NA, NA, NA, NA, NA)
+) %>% 
+  dplyr::arrange(percent_of_goal)
 
 # paypal_links <- tibble(
 #   link = "https://www.paypal.com/paypalme/belaljasem",

@@ -95,7 +95,7 @@ for(i in 1:num_funds){
     read_html_func <- polite_scraping(url)
     
   # # Add a random delay between 1 to 15 seconds
-  random_delay <- runif(1, 10, 20)
+  random_delay <- runif(1, 15, 25)
   Sys.sleep(random_delay)
 
   
