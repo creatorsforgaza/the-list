@@ -424,7 +424,8 @@ chuffed_links <- tibble(
            "https://chuffed.org/project/135758-stand-with-saeed-and-his-family",
            "https://chuffed.org/project/141405-hope-for-nidaa",
            "https://chuffed.org/project/helpmaryam",
-           "https://chuffed.org/project/supporting-ibrahim-and-his-family"),
+           "https://chuffed.org/project/supporting-ibrahim-and-his-family",
+           "https://chuffed.org/project/177348-contribute-to-changing-salams-life-by-supporting-her-education-and-career"),
   link_text = c("Mohammed and his wife",
                 "Help Mahmoud evacuate Gaza",
                 "Help Malak and her family escape",
@@ -432,12 +433,13 @@ chuffed_links <- tibble(
                 "Saeed + Aya + their children",
                 "Nedaa Oweida + family",
                 "Maryam and Family",
-                "Help Ibrahim rebuild"),
+                "Help Ibrahim rebuild",
+                "Changing the lives of Sohad and Salam from Gaza"),
   # total_num_donations = c(NA, NA, NA, NA, NA, NA, NA),
-  currency_abv = c("USD", "USD", "USD", "USD", "USD", "EUR", "USD", "EUR"),
-  amount_raised_num = c(NA, NA, NA, NA, NA, NA, NA, NA),
-  percent_of_goal = c(12.56, 100.47, 80.40, 66.30, 75.34, 11.18, 20.40, 2.37),
-  daily_change = c(NA, NA, NA, NA, NA, NA, NA, NA)
+  currency_abv = c("USD", "USD", "USD", "USD", "USD", "EUR", "USD", "EUR", "USD"),
+  amount_raised_num = c(NA, NA, NA, NA, NA, NA, NA, NA, NA),
+  percent_of_goal = c(12.83, 81.52, 90.88, 75.45, 87.02, 17.37, 47.55, 20.63, 0.75),
+  daily_change = c(NA, NA, NA, NA, NA, NA, NA, NA, NA)
 ) %>% 
   dplyr::arrange(percent_of_goal)
 
@@ -460,9 +462,9 @@ link_text <- final_table %>%
 # format(lubridate::now(), "%I:%M %p %Z")
 
 
-final_table %>% 
+chuffed_links %>% 
   dplyr::bind_rows(
-    chuffed_links
+    final_table
   ) %>% 
   dplyr::select(-c(link_text)) %>% 
   # dplyr::relocate(uuid, .before = link) %>% 
