@@ -462,9 +462,9 @@ link_text <- final_table %>%
 # format(lubridate::now(), "%I:%M %p %Z")
 
 
-chuffed_links %>% 
+final_table %>% 
   dplyr::bind_rows(
-    final_table
+    chuffed_links
   ) %>% 
   dplyr::select(-c(link_text)) %>% 
   # dplyr::relocate(uuid, .before = link) %>% 
