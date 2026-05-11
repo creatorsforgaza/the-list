@@ -6,7 +6,7 @@ library(bslib)
 library(gt)
 library(gtExtras)
 library(polite)
-# 
+# # 
 # drive_auth(path = ".secrets/client_secret.json")
 # gs4_auth(path = ".secrets/client_secret.json")
 
