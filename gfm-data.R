@@ -62,8 +62,11 @@ end_word <- 'suggested_donation_stats'
 
 ### for the total goal amount and currencycode
 # "currencyCode\":\"USD\",\"amount\":50000},\"goalDeadline\":null,
-start_word_total_goal = 'userDefinedGoalAmount'
-end_word_total_goal = 'visibleInSearch'
+# start_word_total_goal = 'userDefinedGoalAmount'
+# end_word_total_goal = 'visibleInSearch'
+
+start_word_total_goal = 'currencyCode'
+end_word_total_goal = 'defaultSlug'
 
 
 ### for the current money raised
@@ -75,8 +78,11 @@ end_word_total_goal = 'visibleInSearch'
 # this should work
 # start_word_current_amount = 'currentAmount'
 # updated 7/7/25
-start_word_current_amount = 'tAmount\\\":\\{\\\"__typename'
-end_word_current_amount = 'defaultSlug'
+start_word_current_amount1 = 'tAmount\\\":\\{\\\"__typename'
+end_word_current_amount1 = 'defaultSlug'
+
+start_word_current_amount = 'goalAmount\\\":\\{\\\"__typename'
+end_word_current_amount = 'templateId'
 
 
 
@@ -86,7 +92,7 @@ polite_scraping <- politely(rvest::read_html)
 
 
 #### trying out polite ----
-for(i in 1:num_funds){
+for(i in 1:3){
 
     url = paste0("https://www.gofundme.com/f/",
                  all_gfm_links[i,1])
@@ -124,9 +130,9 @@ for(i in 1:num_funds){
     dplyr::mutate(result =
                     str_match_all(value,
                                   paste0("(?s)",
-                                         start_word_current_amount,
+                                         start_word_current_amount1,
                                          "(.*?)",
-                                         end_word_current_amount))) %>%
+                                         end_word_current_amount1))) %>%
     dplyr::select(result) %>%
     unlist() %>%
     enframe() %>% 
@@ -169,19 +175,10 @@ for(i in 1:num_funds){
     dplyr::mutate(result =
                     str_match_all(value,
                                   paste0("(?s)",
-                                         start_word_total_goal,
+                                         start_word_current_amount,
                                          "(.*?)",
-                                         end_word_total_goal))) %>%
+                                         end_word_current_amount))) %>%
     dplyr::select(result) %>%
-    # unlist() %>%
-    # enframe() %>%
-    # dplyr::mutate(result =
-    #                 str_match_all(value,
-    #                               paste0("(?s)",
-    #                                      'currencyCode',
-    #                                      "(.*?)",
-    #                                      end_word_total_goal))) %>%  
-    # dplyr::select(result) %>%
     unlist() %>%
     enframe()  %>% 
     dplyr::mutate(total_goal_amount = as.numeric(str_extract_all(value, "[0-9]+"))) %>% 
@@ -194,5 +191,4 @@ for(i in 1:num_funds){
 }
 
 ##### testing -----
-
 
