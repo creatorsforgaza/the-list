@@ -6,7 +6,7 @@ library(bslib)
 library(gt)
 library(gtExtras)
 library(polite)
-
+# 
 # drive_auth(path = ".secrets/client_secret.json")
 # gs4_auth(path = ".secrets/client_secret.json")
 
@@ -92,7 +92,7 @@ polite_scraping <- politely(rvest::read_html)
 
 
 #### trying out polite ----
-for(i in 1:3){
+for(i in 1:num_funds){
 
     url = paste0("https://www.gofundme.com/f/",
                  all_gfm_links[i,1])
