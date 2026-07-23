@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://creatorsforgaza.github.io/the-list/donations-data.html</loc>
-    <lastmod>2026-07-22T20:44:18.407Z</lastmod>
-  </url>
-  <url>
-    <loc>https://creatorsforgaza.github.io/the-list/home/share-the-list/index.html</loc>
-    <lastmod>2026-07-22T20:44:18.408Z</lastmod>
-  </url>
-  <url>
-    <loc>https://creatorsforgaza.github.io/the-list/home/creator-amplifier/index.html</loc>
-    <lastmod>2026-07-22T20:44:18.407Z</lastmod>
-  </url>
-  <url>
-    <loc>https://creatorsforgaza.github.io/the-list/resources.html</loc>
-    <lastmod>2026-07-22T20:44:18.443Z</lastmod>
+    <loc>https://creatorsforgaza.github.io/the-list/faqs.html</loc>
+    <lastmod>2026-07-23T08:23:54.095Z</lastmod>
   </url>
   <url>
     <loc>https://creatorsforgaza.github.io/the-list/volunteer.html</loc>
-    <lastmod>2026-07-22T20:44:18.443Z</lastmod>
-  </url>
-  <url>
-    <loc>https://creatorsforgaza.github.io/the-list/about.html</loc>
-    <lastmod>2026-07-22T20:44:18.407Z</lastmod>
-  </url>
-  <url>
-    <loc>https://creatorsforgaza.github.io/the-list/faqs.html</loc>
-    <lastmod>2026-07-22T20:44:18.407Z</lastmod>
+    <lastmod>2026-07-23T08:23:54.134Z</lastmod>
   </url>
   <url>
     <loc>https://creatorsforgaza.github.io/the-list/home/index.html</loc>
-    <lastmod>2026-07-22T20:44:18.407Z</lastmod>
+    <lastmod>2026-07-23T08:23:54.096Z</lastmod>
+  </url>
+  <url>
+    <loc>https://creatorsforgaza.github.io/the-list/home/creator-amplifier/index.html</loc>
+    <lastmod>2026-07-23T08:23:54.096Z</lastmod>
+  </url>
+  <url>
+    <loc>https://creatorsforgaza.github.io/the-list/about.html</loc>
+    <lastmod>2026-07-23T08:23:54.095Z</lastmod>
+  </url>
+  <url>
+    <loc>https://creatorsforgaza.github.io/the-list/resources.html</loc>
+    <lastmod>2026-07-23T08:23:54.134Z</lastmod>
+  </url>
+  <url>
+    <loc>https://creatorsforgaza.github.io/the-list/home/share-the-list/index.html</loc>
+    <lastmod>2026-07-23T08:23:54.097Z</lastmod>
+  </url>
+  <url>
+    <loc>https://creatorsforgaza.github.io/the-list/donations-data.html</loc>
+    <lastmod>2026-07-23T08:23:54.095Z</lastmod>
   </url>
   <url>
     <loc>https://creatorsforgaza.github.io/the-list/index.html</loc>
-    <lastmod>2026-07-22T20:44:18.434Z</lastmod>
+    <lastmod>2026-07-23T08:23:54.125Z</lastmod>
   </url>
 </urlset>
