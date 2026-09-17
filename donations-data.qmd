@@ -442,7 +442,7 @@ chuffed_links <- tibble(
   # total_num_donations = c(NA, NA, NA, NA, NA, NA, NA),
   currency_abv = c("USD", "USD", "USD", "EUR", "USD", "EUR", "USD", "USD", "EUR", "USD"),
   amount_raised_num = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-  percent_of_goal = c(13.07, 85.51, 94.30, 18.01, 50.32, 25.75, 4.52, 0.01, 1.93, 41.60),
+  percent_of_goal = c(15.88, 95.68, 66.44, 18.04, 57.35, 36.99, 9.01, 0.01, 3.33, 56.53),
   daily_change = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA)
 ) %>% 
   dplyr::arrange(percent_of_goal)
