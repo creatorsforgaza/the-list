@@ -427,7 +427,8 @@ chuffed_links <- tibble(
            "https://chuffed.org/project/177348-contribute-to-changing-salams-life-by-supporting-her-education-and-career",
            "https://gogetfunding.com/help-my-family-in-gaza-to-live-a-dignified-life/",
            "https://chuffed.org/project/185552-help-rawaa-become-a-dentist-triumph-over-war-and-destruction",
-           "https://chuffed.org/project/sawsanq"),
+           "https://chuffed.org/project/sawsanq",
+           "https://chuffed.org/project/211058-five-children-depend-on-me-help-us-find-hope-again"),
   link_text = c("Mohammed and his wife",
                 "Help Mahmoud evacuate Gaza",
                 "Help Malak and her family escape",
@@ -438,12 +439,13 @@ chuffed_links <- tibble(
                 "Changing the lives of Sohad and Salam from Gaza",
                 "Batoul + newborn baby",
                 "Help Rawaa become a Dentist",
-                "Support Sawsan and her family"),
+                "Support Sawsan and her family",
+                "Noha + Yousef + their 5 children"),
   # total_num_donations = c(NA, NA, NA, NA, NA, NA, NA),
-  currency_abv = c("USD", "USD", "USD", "EUR", "USD", "EUR", "USD", "USD", "EUR", "USD"),
-  amount_raised_num = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-  percent_of_goal = c(15.88, 95.68, 66.44, 18.04, 57.35, 36.99, 9.01, 0.01, 3.33, 56.53),
-  daily_change = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA)
+  currency_abv = c("USD", "USD", "USD", "EUR", "USD", "EUR", "USD", "USD", "EUR", "USD", "GBP"),
+  amount_raised_num = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
+  percent_of_goal = c(15.88, 95.68, 66.44, 18.04, 57.35, 36.99, 9.01, 0.01, 3.33, 56.53, 0),
+  daily_change = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA)
 ) %>% 
   dplyr::arrange(percent_of_goal)
 
